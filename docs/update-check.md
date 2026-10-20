@@ -69,6 +69,20 @@ not proof of a particular ISP, country, hardware fault or motor-driver refusal.
 Network-check errors are not CAN EMCY/motion faults and do not write a motor
 fault snapshot to Flash. Default serial operation remains quiet.
 
+In rc.9, failure details include a suggested action and the last confirmed
+stage. The public HTTP SDK confirms a completed secure connection, request sent,
+headers and body; it does not expose separate successful DNS/TCP/TLS stages
+before connection completion. Unknown connection timeout remains explicitly
+unattributed. The previous 100 ms asynchronous connection path is not changed or
+qualified by this diagnostic revision.
+
+The private source includes `tools/s3_update_diagnostics.py` for an explicit
+read-only query of the retained RAM result. Its CRC-protected UPDATE GET request
+within a SYNC lease receives one numeric Q reply: boot-local attempt ID, stage,
+elapsed times, bytes and SDK/HTTP/TLS/socket codes. It neither starts a query nor
+retries or enables motion. A later query, maintenance session or reboot may
+replace/clear the RAM evidence. No raw response, credentials or SSIDs are exported.
+
 Any failed check clears the previous comparison result. It must never say
 "already latest" on failure. Both components are reported as latest only if
 both current versions are known and exactly match their selected public entries.

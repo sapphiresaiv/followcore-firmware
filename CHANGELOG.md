@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.0.0-rc.9 — FollowCore-CAN S3 only
+
+- Show the observed failure category, action hint and last confirmed stage for
+  update queries; distinguish DNS, connection, TLS/certificate, HTTP and local errors.
+- Do not blame unknown timeouts on the user's network or infer GitHub access
+  from a successful time synchronization.
+- Retain per-attempt timing, received bytes and SDK/error evidence in RAM, read
+  once on explicit UPDATE GET without starting networking or motion.
+- Keep normal serial output quiet, N-mirror layout and network/motion admission
+  unchanged. No driver update, motor, PDO, homing or current-limit changes.
+- This improves diagnostics; it does not repair/qualify the prior SDK asynchronous
+  connection path or establish regional Internet/long-term reliability.
+
 ## v3.0.0-rc.8 — FollowCore-CAN S3 only
 
 - Show an immediate querying label and disabled state during queued, clock and

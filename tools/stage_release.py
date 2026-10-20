@@ -35,6 +35,7 @@ def main():
     p.add_argument("--github-check", action="store_true", help="This S3 implements version checking, not online installation")
     p.add_argument("--commissioning-ui", action="store_true", help="This revision fixes first-use maintenance and simplifies the UI")
     p.add_argument("--button-feedback", action="store_true", help="This revision fixes query and shared button feedback")
+    p.add_argument("--update-errors", action="store_true", help="This revision adds visible query failure categories and explicit RAM diagnostics")
     p.add_argument("--s3-web", type=Path, required=True)
     p.add_argument("--validation", type=Path, required=True, help="Reviewed public validation JSON; never infer PASS from a build")
     args = p.parse_args()
@@ -237,6 +238,42 @@ flash addresses. Private keys, MCU source, ELF and raw captures are excluded.
 Actual tests and limitations are recorded in release-manifest.json. Simulated
 query/HTTP errors and UI tests are not proof of regional Internet access,
 mechanical safety, loaded behavior or long-term reliability.
+
+Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
+Download the accompanying third-party notices. Upstream licenses remain valid.
+"""
+        (out / "RELEASE_NOTES.md").write_text(notes)
+    if args.update_errors:
+        if not args.s3_only or args.commissioning_ui or args.button_feedback:
+            raise ValueError("Update diagnostics is an S3-only release with its own notes")
+        notes = f"""# FollowCore-CAN {version}
+
+Pre-release for controlled evaluation, not stable or production qualified.
+S3 {version}, source `{components['s3']['commit']}`.
+Compatible unchanged F303: {driver_version}, source `{components['f303']['commit']}`.
+Only S3 and its matching browser UI are updated.
+
+Show concrete query failures, suggested actions and the last confirmed stage:
+DNS, unreachable/refused/interrupted connections, TLS/certificate validation,
+HTTP 404/403/429/5xx, response size/redirect/catalog and local device failures.
+An unknown connection timeout is not blamed on the user or regional network.
+No HTTP response means unknown, not successful access or proof of a bad URL.
+
+Retain the last attempt's stage, timing, byte count and SDK/HTTP/TLS/socket codes
+in RAM. An explicit read-only UPDATE GET serial request returns one Q reply;
+it never starts networking, a retry, motion, logging or Flash writes. Default
+serial output stays quiet. The existing maintenance N layout is unchanged.
+
+This is diagnostic reporting, NOT a repair or qualification of the SDK's 100 ms
+asynchronous connection path. SNTP success does not establish GitHub access.
+First-use admission, cancellation, certificate/hostname/signature checks and
+rollback remain in force. No F303, PDO, homing or current-limit change.
+Direct GitHub download/install and automatic F303 updating remain unavailable.
+
+See release-manifest.json for actual evidence and limitations. Simulated network
+errors do not prove physical MCU Internet access or regional reliability. Use
+the matching signed image and browser package; do not erase NVS or guess flash
+addresses. MCU source, private keys, ELF and raw captures are excluded.
 
 Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
 Download the accompanying third-party notices. Upstream licenses remain valid.
