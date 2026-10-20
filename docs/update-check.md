@@ -1,8 +1,8 @@
 # Controller-side version checking
 
-The candidate under development adds an explicit **Check updates** operation on
+The S3 `v3.0.0-rc.5` candidate adds an explicit **Check updates** operation on
 the S3 itself. The browser mirror only displays the S3 result. The installed
-`v3.0.0-rc.3` does not have this operation; do not mistake local hotspot upload
+`v3.0.0-rc.3` did not have this operation; do not mistake local hotspot upload
 for Internet version checking.
 
 The public catalog is

@@ -39,5 +39,13 @@ Verify reported versions. Exit maintenance and explicitly restore control as
 instructed locally; repeat homing before ordinary motion. Do not resume an old
 movement automatically.
 
-Direct GitHub checking/downloads from the controller are planned, not enabled
-by this public release manifest. Keep the local upload method available.
+S3 rc.5 adds explicit [controller-side version checks](update-check.md), after
+homing and returning to MinPost. Navigation does not cancel the maintenance lock;
+use the explicitly labelled cancellation action. First-boot local maintenance must
+be explicitly cancelled before restoring control and homing. Physical isolation
+recovery remains wired; it does not authorize wireless operation.
+
+Direct GitHub download/install is not implemented. F303 is only compared and
+reported, not automatically updated by S3. Keep the signed local upload method
+and qualified wired recovery available. Internet failures must not be reported
+as "already latest" or as CAN/motor faults.

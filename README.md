@@ -22,7 +22,8 @@ Use [GitHub Releases](https://github.com/sapphiresaiv/followcore-firmware/releas
 Download the component-specific BIN and matching documentation/checksums.
 Controller and motor-driver BIN files are **not interchangeable**.
 
-`v3.0.0-rc.3` is a **release candidate for controlled evaluation**, not a stable
+`v3.0.0-rc.5` (S3, compatible unchanged F303 `v3.0.0-rc.3`) is a
+**release candidate for controlled evaluation**, not a stable
 or production-qualified release. Read the release's compatibility table and
 known limitations before installation. Older test counts do not certify a new
 firmware version.
@@ -36,7 +37,9 @@ firmware version.
 - S3 local Wi-Fi hotspot upload with signed image verification and dual-slot
   boot validation/rollback support on the qualified partition layout.
 
-Direct GitHub update checking/downloading is **planned, not implemented**.
+S3 `rc.5` implements explicit MCU-side version checking, separate controller/driver
+comparison, and network failure diagnostics. [Read the checks and safety gates](docs/update-check.md).
+Direct GitHub firmware download/install is **not implemented**.
 S3 OTA does not update the F303 driver. Universal servo compatibility and
 CANopen/EtherCAT safety or conformance certification are not claimed.
 
