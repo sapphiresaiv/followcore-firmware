@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.0.0-rc.10 — FollowCore-CAN S3 only
+
+- Correct pinned ESP-IDF async connection polling: rebuild select descriptor
+  sets on every poll and resume correctly after a timeout or interruption.
+- Reject actual socket/select failures before TLS and forward async connection
+  error evidence to the existing HTTP diagnostics.
+- Apply the hash-pinned correction only in the build directory; leave the shared
+  SDK untouched and fail configuration for unreviewed SDK source changes.
+- Retain polling intervals, deadlines, certificate validation, cancellation and
+  maintenance safety gates. No driver, CAN/PDO, motion or homing changes.
+- Host replays exercise actual SDK functions; physical MCU Internet reachability
+  and regional reliability remain subject to retesting.
+
 ## v3.0.0-rc.9 — FollowCore-CAN S3 only
 
 - Show the observed failure category, action hint and last confirmed stage for

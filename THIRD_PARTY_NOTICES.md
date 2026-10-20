@@ -17,6 +17,13 @@ License 1.1, including Adobe's copyright notice in
 [followcore-ui-font-ofl.txt](licenses/followcore-ui-font-ofl.txt).
 These subsets replace the earlier PingFang-generated ones in this release.
 
+Starting with S3 v3.0.0-rc.10, FollowCore modifies two ESP-IDF 5.5 compilation
+units under their existing Apache-2.0 license: `components/esp-tls/esp_tls.c`
+(asynchronous connection descriptor-set rearming and socket error checks) and
+`components/tcp_transport/transport_ssl.c` (asynchronous error forwarding).
+These are FollowCore changes, not an upstream release or endorsement. Original
+Espressif copyright and license notices remain applicable.
+
 Selected source locations:
 
 - https://github.com/espressif/esp-idf

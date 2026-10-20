@@ -22,7 +22,7 @@ Use [GitHub Releases](https://github.com/sapphiresaiv/followcore-firmware/releas
 Download the component-specific BIN and matching documentation/checksums.
 Controller and motor-driver BIN files are **not interchangeable**.
 
-`v3.0.0-rc.9` (S3, compatible unchanged F303 `v3.0.0-rc.3`) is a
+`v3.0.0-rc.10` (S3, compatible unchanged F303 `v3.0.0-rc.3`) is a
 **release candidate for controlled evaluation**, not a stable
 or production-qualified release. Read the release's compatibility table and
 known limitations before installation. Older test counts do not certify a new

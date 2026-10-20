@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "product": "FollowCore",
+  "variant": "FollowCore-CAN",
+  "control_type": "CAN",
+  "version": "v3.0.0-rc.10",
+  "channel": "prerelease",
+  "release_tag": "followcore-can-v3.0.0-rc.10",
+  "repository": "sapphiresaiv/followcore-firmware",
+  "controller_hardware": "ESP-V3.003 / ESP32-S3-WROOM-1-N16R8",
+  "paired_driver": "supported STM32F303 project hardware with existing IAP",
+  "components": {
+    "s3": {
+      "version": "v3.0.0-rc.10",
+      "commit": "2b53ea26e001ab86b9a70db6353b94ed5ee092ba",
+      "image_bytes": 2351104,
+      "image_sha256": "52cb76072bf678baf6b3ccf95bdd0286d74ac1bebe4aeddd2068e544b753a382",
+      "file": "followcore-can-s3-v3.0.0-rc.10-ota.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.10/followcore-can-s3-v3.0.0-rc.10-ota.bin",
+      "included_in_release": true,
+      "update_required": true
+    },
+    "f303": {
+      "version": "v3.0.0-rc.3",
+      "commit": "fb9b11db6b8e532aa1353cb746daf81ad48e7969",
+      "image_bytes": 100112,
+      "image_sha256": "498371dfb5d8c21e9b9bbc697d781bccb51e1ef22a03207f841f0d989e82f157",
+      "file": "followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.3/followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "included_in_release": false,
+      "update_required": false
+    }
+  },
+  "github_device_ota_available": false,
+  "github_device_check_available": true,
+  "pulse_available": false,
+  "ethercat_available": false,
+  "validation": {
+    "version": "v3.0.0-rc.10",
+    "variant": "FollowCore-CAN",
+    "date": "2026-10-20",
+    "host_cpp_groups": 109,
+    "host_cpp_and_adjuncts": "PASS_ASAN_UBSAN",
+    "actual_sdk_function_regressions": "PASS; original pinned SDK fails delayed-readiness and asynchronous error-forwarding replays; corrected functions pass both",
+    "async_connect_scenarios": "PASS; delayed and repeated timeout recovery, EINTR, select failure, getsockopt failure, refused socket, spurious readiness, immediate success, plain TCP and blocking-path preservation",
+    "sdk_generation_guards": "PASS; exact upstream hashes, unique anchors, unknown-SDK refusal and idempotent generation; shared SDK unchanged",
+    "compiled_sdk_units": {
+      "esp_tls.c": "d89981696c9af801e992fba947b1ce701f16d1a7b9fd079c40c09a734865eb7a",
+      "transport_ssl.c": "96cc545fde2a6fe1ed6e5f41c95027417afc58a6702268d826e0c6bfd4b6a653"
+    },
+    "target_build_integration": "PASS; compilation database and successful clean PIO build select both corrected build-local units, not the original units",
+    "s3_build_signature_provenance": "PASS; frozen source 2b53ea26e001ab86b9a70db6353b94ed5ee092ba",
+    "s3_static_ram_bytes": 92996,
+    "s3_installed_and_sdk_boot_confirmed": true,
+    "deployment": "PASS; signed ota_0 installed, prior VALID rc.9 ota_1/NVS/partition table/reserved regions preserved and verified; no motor commands",
+    "boot_confirmation_ms": 3157,
+    "boot_observation_seconds": 35,
+    "status_frames": 151,
+    "invalid_crc": 0,
+    "status_frames_after_stop": 0,
+    "browser_ui": "UNCHANGED; four files are byte-identical to rc.9 and the installed local browser bundle; protocol/UI layout unchanged",
+    "driver": "v3.0.0-rc.3 unchanged; no driver rebuild or flash",
+    "device_internet_check": "NOT_RUN for this candidate; user will reconnect Wi-Fi and retry. Host SDK replays are not MCU packet capture or proof of GitHub connectivity",
+    "deadlines_and_security": "UNCHANGED; 100 ms polling slice, 20-second fetch deadline, SNTP/date, certificate/hostname verification, cancellation, signed update and rollback",
+    "direct_github_download_install": "NOT_IMPLEMENTED",
+    "mechanical_loaded_and_long_term_acceptance": "NOT_QUALIFIED",
+    "warning": "This fixes a reproducible SDK defect but does not prove that it was the sole cause of the preceding device timeout or exclude independent network faults. No motor, CAN/PDO, homing or current-limit changes. Compiler local frames are not full runtime TLS stack bounds."
+  },
+  "assets": [
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.10-ota.bin",
+      "bytes": 2351104,
+      "sha256": "52cb76072bf678baf6b3ccf95bdd0286d74ac1bebe4aeddd2068e544b753a382",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.10/followcore-can-s3-v3.0.0-rc.10-ota.bin"
+    },
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.10-web.zip",
+      "bytes": 640622,
+      "sha256": "2e45418b3a56d41959b372b6141ed331d1cba9fe9ca71254aafaa30fd7facc7c",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.10/followcore-can-s3-v3.0.0-rc.10-web.zip"
+    },
+    {
+      "file": "followcore-can-v3.0.0-rc.10-notices.zip",
+      "bytes": 46198,
+      "sha256": "97223fbaf44799a62d75623e5ef4e0fbfffd597abdacb6933e313a1d8ddc9c5b",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.10/followcore-can-v3.0.0-rc.10-notices.zip"
+    }
+  ]
+}
