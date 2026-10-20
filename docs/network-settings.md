@@ -41,3 +41,11 @@ explicit serial diagnostic read, not a continual serial stream. A resolved IP
 is not proof that HTTPS or GitHub works. These presets use ordinary plaintext
 DNS, not encrypted DNS or a guarantee against interception. A provider's name
 does not select a country endpoint. HTTPS certificate/hostname checks stay on.
+
+Use rc.14 or later for DNS presets. In rc.13, attempting to clear an empty DNS
+slot through ESP-NETIF returned `0x5001`; the same mistake during restoration
+could leave closing in a retry loop. rc.14 clears empty slots using lwIP's
+documented operation on its TCP/IP thread and verifies the result. Nonempty
+addresses still use ESP-NETIF. Connecting to the saved network does not require
+a preliminary scan. rc.13 is withdrawn from the testing catalog; its original
+release assets remain immutable for diagnosis.

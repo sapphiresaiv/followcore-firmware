@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "product": "FollowCore",
+  "variant": "FollowCore-CAN",
+  "control_type": "CAN",
+  "version": "v3.0.0-rc.14",
+  "channel": "prerelease",
+  "release_tag": "followcore-can-v3.0.0-rc.14",
+  "repository": "sapphiresaiv/followcore-firmware",
+  "controller_hardware": "ESP-V3.003 / ESP32-S3-WROOM-1-N16R8",
+  "paired_driver": "supported STM32F303 project hardware with existing IAP",
+  "components": {
+    "s3": {
+      "version": "v3.0.0-rc.14",
+      "commit": "44537748fd119afee4899a2cdbdee2f88ddddc9a",
+      "image_bytes": 2363392,
+      "image_sha256": "6d041e38d9f5d126a658ea11086851c532afc831ed79c898156ed0d8dfece0bc",
+      "file": "followcore-can-s3-v3.0.0-rc.14-ota.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.14/followcore-can-s3-v3.0.0-rc.14-ota.bin",
+      "included_in_release": true,
+      "update_required": true
+    },
+    "f303": {
+      "version": "v3.0.0-rc.3",
+      "commit": "fb9b11db6b8e532aa1353cb746daf81ad48e7969",
+      "image_bytes": 100112,
+      "image_sha256": "498371dfb5d8c21e9b9bbc697d781bccb51e1ef22a03207f841f0d989e82f157",
+      "file": "followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.3/followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "included_in_release": false,
+      "update_required": false
+    }
+  },
+  "github_device_ota_available": false,
+  "github_device_check_available": true,
+  "pulse_available": false,
+  "ethercat_available": false,
+  "validation": {
+    "version": "v3.0.0-rc.14",
+    "variant": "FollowCore-CAN",
+    "date": "2026-10-20",
+    "source_commit": "44537748fd119afee4899a2cdbdee2f88ddddc9a",
+    "host_cpp_groups": 112,
+    "host_cpp_and_adjuncts": "PASS_ASAN_UBSAN; complete control/gateway/motion/homing/maintenance groups and Python/SDK/web/signing adjuncts",
+    "root_cause": "IDF 5.5 ESP-NETIF rejects an empty DNS address with 0x5001. rc.13 used that setter when clearing and restoring empty backup/fallback entries; the old host stub incorrectly accepted it.",
+    "actual_sdk_contract_replay": "PASS_ASAN_UBSAN; compile extracted actual ESP-NETIF setter and lwIP dns_setserver implementations; verify zero-address rejection and null-pointer clear behavior",
+    "dns_transport_regression": "PASS; corrected stub reproduces rc.13 failure; reviewed TCP/IP-thread clear/readback adapter and 100 host direct-connect/preset/restore/close cycles pass",
+    "sdk_not_modified": true,
+    "web_wasm_smoke": "PASS; matching rc.14 bundle, unchanged UI/wire format from rc.13",
+    "s3_build_signature_provenance": "PASS; clean build, descriptor, embedded source and signature match the immutable source snapshot and fixed trust anchor",
+    "s3_image_sha256": "6d041e38d9f5d126a658ea11086851c532afc831ed79c898156ed0d8dfece0bc",
+    "s3_image_bytes": 2363392,
+    "s3_static_ram_bytes": 93524,
+    "s3_installed_and_sdk_boot_confirmed": true,
+    "boot_confirmation_ms": 3143,
+    "boot_observation": "PASS; 35 seconds, 151 S frames, invalid CRC 0, zero status frames after explicit SYNC STOP",
+    "deployment": "Signed ota_1 installed and SDK-confirmed; previous VALID rc.13 ota_0 retained as a rollback image, not recommended for DNS presets. Existing partition table/NVS/reserved regions preserved and verified.",
+    "hardware_saved_network_direct_connect_close": {
+      "result": "PASS, three complete consecutive native UI cycles after initial post-flash re-entry observation",
+      "dns_provider": "AliDNS, already saved",
+      "scan_requests": 0,
+      "credentials_or_dns_choice_modified": false,
+      "online_seconds": [
+        3.04,
+        3.057,
+        2.865
+      ],
+      "close_and_fresh_can_recovery_seconds": [
+        0.681,
+        0.638,
+        0.637
+      ],
+      "closed_state": "Network Off, maintenance Idle, error 0, CAN online with valid fresh position, motor disabled and no motion intent",
+      "communication_observations_in_three_cycles": 0,
+      "evidence_rate": "S3 5Hz software mirrors and native touch receipts; not RF spectrum or raw CAN capture"
+    },
+    "initial_hardware_probe_limitations": "First observer waited for N while still on Home and made no UI actions. Next observer connected successfully and requested close, then stopped on an EMCY-active sample during initial offline-to-CAN re-entry; its exact code was not captured. Subsequent read-only evidence confirmed Network Off/error 0 and all active protections clear, without reset/fault clearing. Three further cycles passed. This is not a claim of universal communication reliability or proof of that transient's cause.",
+    "hardware_other_dns_providers": "NOT_TESTED on hardware; host tests cover all four presets. Actual resolver reachability remains network-dependent.",
+    "hardware_explicit_update_query": "One extra saved-network direct connection succeeded. Explicit query failed at clock preflight after 15010ms (ESP_ERR_TIMEOUT 0x107), before GitHub DNS/TLS/HTTP; HTTP status and received bytes 0. Retained read-only Q confirms AliDNS 223.5.5.5 / 223.6.6.6, fallback 0, DNS elapsed/error 0. No claim of successful Internet/GitHub reachability.",
+    "dns_security_limits": "Ordinary plaintext DNS, not DoH/DoT or an anti-poisoning guarantee; no fixed GitHub IP or disabled HTTPS verification",
+    "driver": "v3.0.0-rc.3 unchanged; no F303 serial query, rebuild or flash",
+    "motion_can_pdo_homing_current_limits": "UNCHANGED; no mechanical target, homing, follow or enable request in this acceptance",
+    "direct_github_download_install": "NOT_IMPLEMENTED",
+    "long_term_loaded_power_loss_reliability": "NOT_QUALIFIED"
+  },
+  "assets": [
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.14-ota.bin",
+      "bytes": 2363392,
+      "sha256": "6d041e38d9f5d126a658ea11086851c532afc831ed79c898156ed0d8dfece0bc",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.14/followcore-can-s3-v3.0.0-rc.14-ota.bin"
+    },
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.14-web.zip",
+      "bytes": 643657,
+      "sha256": "f3711edf8a31a91b3cca499819af9e03c32522d196cc42cae663215c80aeaffe",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.14/followcore-can-s3-v3.0.0-rc.14-web.zip"
+    },
+    {
+      "file": "followcore-can-v3.0.0-rc.14-notices.zip",
+      "bytes": 46198,
+      "sha256": "97223fbaf44799a62d75623e5ef4e0fbfffd597abdacb6933e313a1d8ddc9c5b",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.14/followcore-can-v3.0.0-rc.14-notices.zip"
+    }
+  ]
+}

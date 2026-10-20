@@ -39,6 +39,7 @@ def main():
     p.add_argument("--async-tls-fix", action="store_true", help="This revision corrects pinned SDK async connection polling and error forwarding")
     p.add_argument("--network-profile-ui", action="store_true", help="This revision adds remembered Wi-Fi and global connection/navigation feedback")
     p.add_argument("--dns-presets", action="store_true", help="This S3-only revision adds named DNS presets and asynchronous lookup diagnostics")
+    p.add_argument("--dns-empty-fix", action="store_true", help="This revision corrects rc.13 empty DNS set/restore and close failure")
     p.add_argument("--s3-web", type=Path, required=True)
     p.add_argument("--validation", type=Path, required=True, help="Reviewed public validation JSON; never infer PASS from a build")
     args = p.parse_args()
@@ -57,6 +58,8 @@ def main():
     if args.dns_presets and (not args.s3_only or any((args.commissioning_ui,args.button_feedback,
             args.update_errors,args.async_tls_fix,args.network_profile_ui))):
         raise ValueError("DNS presets require separate S3-only release notes")
+    if args.dns_empty_fix and not args.dns_presets:
+        raise ValueError("DNS empty-entry correction requires the DNS preset notes")
     validation = json.loads(args.validation.read_text())
     if validation.get("version") != version or validation.get("variant") != "FollowCore-CAN":
         raise ValueError("Validation record does not belong to this candidate")
@@ -360,6 +363,14 @@ Download the accompanying third-party notices. Upstream licenses remain valid.
 """
         (out / "RELEASE_NOTES.md").write_text(notes)
     if args.dns_presets:
+        repair = """Correct rc.13's deterministic preset/close failure (0x5001): IDF rejects
+empty DNS addresses. Set nonempty entries through ESP-NETIF and clear empty
+entries on the TCP/IP thread through lwIP's supported clear operation. Restore
+the DHCP baseline, including empty backup/fallback entries, without ignoring
+errors or leaving a preset in Automatic mode. Scan-first is not required for
+a saved network. Actual SDK function replays and a 100-cycle transport test
+cover the contract previously omitted by the host stub.
+""" if args.dns_empty_fix else ""
         notes = f"""# FollowCore-CAN {version}
 
 Pre-release for controlled evaluation, not stable or production qualified.
@@ -367,6 +378,7 @@ S3 {version}, source `{components['s3']['commit']}`.
 Compatible unchanged F303: {driver_version}, source `{components['f303']['commit']}`.
 Only S3 requires an update. Refresh the matching browser bundle after installing.
 
+{repair}
 Choose Automatic (DHCP/router), AliDNS, Google Public DNS or Cloudflare in Wi-Fi.
 No manual IP entry is required. An explicit choice is saved separately in NVS;
 unchanged choices do not rewrite. Changing a choice closes idle Wi-Fi and keeps

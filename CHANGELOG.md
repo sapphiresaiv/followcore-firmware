@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.0.0-rc.14 — FollowCore-CAN S3 only
+
+- Fix rc.13 preset setup and closing stuck at `0x5001`: ESP-NETIF does not
+  accept empty DNS addresses; empty entries now use a verified lwIP clear in
+  the TCP/IP context, not the rejecting setter.
+- Restore empty DHCP backup/fallback entries correctly; do not hide errors or
+  leak a selected preset into later Automatic sessions.
+- Correct the host stub and add actual SDK function replays plus 100 direct
+  connect/preset/restore/close cycles. See the release's actual hardware scope.
+- Keep presets/UI/wire layout, mechanical maintenance gates and F303 unchanged.
+
 ## v3.0.0-rc.13 — FollowCore-CAN S3 only
 
 Withdrawn from the testing catalog: selecting a preset can fail setup with
