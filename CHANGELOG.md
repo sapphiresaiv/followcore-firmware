@@ -2,6 +2,11 @@
 
 ## v3.0.0-rc.13 — FollowCore-CAN S3 only
 
+Withdrawn from the testing catalog: selecting a preset can fail setup with
+`0x5001` and leave network closing stuck. IDF 5.5 rejects empty DNS entries;
+the rc.13 host stub missed this SDK restriction. Use automatic-DNS rc.12 until
+the corrected candidate is verified. Existing signed assets remain immutable.
+
 - Add named Automatic, AliDNS, Google and Cloudflare presets; no IP keyboard.
 - Persist the explicit choice independently; reconnect after a change, retaining
   maintenance. Reject changes during queries/feedback or RF transitions.
