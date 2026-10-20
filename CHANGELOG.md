@@ -1,5 +1,19 @@
 # Changelog
 
+## v3.0.0-rc.12 — FollowCore-CAN S3 only
+
+- Remember the last successfully connected SSID/password as one NVS record;
+  prefill SSID and reuse the saved password only for that exact SSID.
+- Add explicit Forget network. Keep credentials out of status/feedback mirrors,
+  avoid unchanged Flash writes and do not start Wi-Fi automatically at boot.
+- Show a global Wi-Fi connection icon before uptime; distinguish hotspot AP.
+- Route maintenance banners to maintenance, with fresh faults taking priority.
+- Add three read-only U mirror fields; refresh the matching browser bundle.
+- Local NVS is unencrypted; logical forgetting is not secure physical erasure.
+- Retain rc.10 async TLS correction. No driver, CAN/PDO or motion changes.
+- Internal rc.11 was superseded before publication after correcting the new
+  host-side screenshot fixture; immutable source snapshots were not moved.
+
 ## v3.0.0-rc.10 — FollowCore-CAN S3 only
 
 - Correct pinned ESP-IDF async connection polling: rebuild select descriptor

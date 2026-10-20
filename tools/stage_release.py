@@ -37,6 +37,7 @@ def main():
     p.add_argument("--button-feedback", action="store_true", help="This revision fixes query and shared button feedback")
     p.add_argument("--update-errors", action="store_true", help="This revision adds visible query failure categories and explicit RAM diagnostics")
     p.add_argument("--async-tls-fix", action="store_true", help="This revision corrects pinned SDK async connection polling and error forwarding")
+    p.add_argument("--network-profile-ui", action="store_true", help="This revision adds remembered Wi-Fi and global connection/navigation feedback")
     p.add_argument("--s3-web", type=Path, required=True)
     p.add_argument("--validation", type=Path, required=True, help="Reviewed public validation JSON; never infer PASS from a build")
     args = p.parse_args()
@@ -49,6 +50,9 @@ def main():
         raise ValueError("Invalid compatible driver candidate")
     if args.s3_only and not (ROOT / "firmware/followcore-can/releases" / driver_version / "release-manifest.json").is_file():
         raise ValueError("S3-only update requires an existing public driver release")
+    if args.network_profile_ui and (not args.s3_only or any((args.commissioning_ui,
+            args.button_feedback, args.update_errors, args.async_tls_fix))):
+        raise ValueError("Network profile/UI update requires S3-only release notes")
     validation = json.loads(args.validation.read_text())
     if validation.get("version") != version or validation.get("variant") != "FollowCore-CAN":
         raise ValueError("Validation record does not belong to this candidate")
@@ -311,6 +315,41 @@ download/install and automatic F303 updating remain unavailable. See
 release-manifest.json for actual evidence and limitations. Use the signed S3 OTA
 image; do not erase NVS or guess flash addresses. Private keys, MCU source, ELF
 and raw captures are excluded from the public binary release.
+
+Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
+Download the accompanying third-party notices. Upstream licenses remain valid.
+"""
+        (out / "RELEASE_NOTES.md").write_text(notes)
+    if args.network_profile_ui:
+        notes = f"""# FollowCore-CAN {version}
+
+Pre-release for controlled evaluation, not stable or production qualified.
+S3 {version}, source `{components['s3']['commit']}`.
+Compatible unchanged F303: {driver_version}, source `{components['f303']['commit']}`.
+Only S3 requires an update. Refresh the matching browser bundle after installing.
+
+Show a Wi-Fi icon before the top-bar clock when associated with an IP address;
+show AP separately for the local hotspot. This is not an RSSI meter or a guarantee
+of Internet access. Route the maintenance banner to maintenance; a fresh fault
+still takes priority and opens fault history. Navigation retains the motion lock.
+
+Remember the most recent successful SSID/password pair in a dedicated NVS key.
+Enter the password once after upgrading; later select the exact saved SSID and
+leave the password blank to reuse it. A new typed password overrides the saved
+one. Failed/cancelled connections do not save; unchanged pairs do not rewrite.
+Forget network removes only that logical key. No automatic boot-time networking.
+
+Passwords are not sent through status mirrors or diagnostic feedback, but local
+NVS is NOT encrypted. Physical Flash access can expose stored credentials;
+logical deletion is not forensic secure erasure. Do not use a sensitive network
+where this storage model is unacceptable. Storage errors are reported separately
+from motor/CAN faults. Host tests do not certify real power-loss behavior.
+
+The U mirror adds three read-only fields; old browser bundles may reject it.
+S/N/Q, CAN/PDO, drive algorithms, homing and current limits remain unchanged.
+Direct GitHub device download/install and automatic F303 updating remain
+unavailable. See release-manifest.json for actual validation and limitations.
+Use the signed S3 OTA image; do not erase NVS or guess flash addresses.
 
 Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
 Download the accompanying third-party notices. Upstream licenses remain valid.

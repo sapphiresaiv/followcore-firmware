@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "product": "FollowCore",
+  "variant": "FollowCore-CAN",
+  "control_type": "CAN",
+  "version": "v3.0.0-rc.12",
+  "channel": "prerelease",
+  "release_tag": "followcore-can-v3.0.0-rc.12",
+  "repository": "sapphiresaiv/followcore-firmware",
+  "controller_hardware": "ESP-V3.003 / ESP32-S3-WROOM-1-N16R8",
+  "paired_driver": "supported STM32F303 project hardware with existing IAP",
+  "components": {
+    "s3": {
+      "version": "v3.0.0-rc.12",
+      "commit": "bb61576b79308c877c1e5e210bcb92a1014ae3af",
+      "image_bytes": 2355200,
+      "image_sha256": "d65c7033bdfe1a558be9041f127a7b217ff9215a9108f9a714aa69e23d21d945",
+      "file": "followcore-can-s3-v3.0.0-rc.12-ota.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.12/followcore-can-s3-v3.0.0-rc.12-ota.bin",
+      "included_in_release": true,
+      "update_required": true
+    },
+    "f303": {
+      "version": "v3.0.0-rc.3",
+      "commit": "fb9b11db6b8e532aa1353cb746daf81ad48e7969",
+      "image_bytes": 100112,
+      "image_sha256": "498371dfb5d8c21e9b9bbc697d781bccb51e1ef22a03207f841f0d989e82f157",
+      "file": "followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.3/followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "included_in_release": false,
+      "update_required": false
+    }
+  },
+  "github_device_ota_available": false,
+  "github_device_check_available": true,
+  "pulse_available": false,
+  "ethercat_available": false,
+  "validation": {
+    "version": "v3.0.0-rc.12",
+    "variant": "FollowCore-CAN",
+    "date": "2026-10-20",
+    "host_cpp_groups": 110,
+    "host_cpp_and_adjuncts": "PASS_ASAN_UBSAN; includes profile storage, maintenance owner, web protocol, signing, lifecycle and pinned SDK regressions",
+    "profile_storage_host": "PASS; single paired blob, exact SSID reuse, fresh-read restart model, no rewrite on unchanged reconnect, explicit errors, corrupt-record rejection and scoped logical deletion",
+    "profile_storage_limits": "Host stubs, not real MCU power-cycle/power-loss qualification. Failed commit may already have changed physical storage. NVS is unencrypted; logical deletion is not forensic erasure",
+    "maintenance_integration_host": "PASS; credentials resolved only after admission; save only after association/IP; failed or cancelled connection does not save; forget retains the maintenance lease and does not start RF or motion",
+    "native_lvgl": "PASS; eight header pages, no overlap, fresh fault priority, maintenance navigation, SSID prefill/no password mirror, forget availability and unchanged refresh behavior",
+    "wasm_lvgl": "PASS; dynamic allocator and S3-equivalent 192KiB fixed pool; global U connection state changes the header only; AP distinct; existing pages/keyboard/maintenance regressions pass",
+    "serial_protocol": "U adds three validated read-only fields; old suffixes default to off/unavailable; S/N/Q unchanged; matching browser bundle required",
+    "source_commit": "bb61576b79308c877c1e5e210bcb92a1014ae3af",
+    "superseded_snapshot": "Internal rc.11 not released; rc.12 corrects only the new screenshot test fixture and version relative to rc.11",
+    "build_provenance_guard": "Incremental output with stale rc.11 ESP application descriptor was rejected before installation; candidate requires clean rebuild and descriptor/source verification",
+    "s3_clean_build_signature_provenance": "PASS; application descriptor and embedded source match frozen rc.12; fixed public signing-key pairing verified",
+    "s3_image_sha256": "d65c7033bdfe1a558be9041f127a7b217ff9215a9108f9a714aa69e23d21d945",
+    "s3_image_bytes": 2355200,
+    "s3_static_ram_bytes": 93164,
+    "compiler_local_frames": "PASS existing logger/INA frame limits; not a full task/TLS runtime stack bound",
+    "s3_installed_and_sdk_boot_confirmed": true,
+    "deployment": "PASS; signed ota_1 installed, prior VALID rc.10 ota_0/NVS/partition table/reserved regions preserved and verified; no motor commands; serial released",
+    "boot_confirmation_ms": 3159,
+    "boot_observation_seconds": 35,
+    "status_frames": 151,
+    "invalid_crc": 0,
+    "status_frames_after_stop": 1,
+    "post_stop_limit": "Observer counted one status frame after sending SYNC STOP; this record does not claim zero trailing frames or a separate sustained-silence qualification",
+    "browser_deployment": "PASS; matching four-file bundle copied to local dist; prior rc.10 files retained separately",
+    "device_saved_credentials_reboot_test": "NOT_RUN; first successful password entry on the new firmware is still required",
+    "driver": "v3.0.0-rc.3 unchanged; no driver rebuild or flash",
+    "motion_can_pdo_homing_current_limits": "UNCHANGED",
+    "direct_github_download_install": "NOT_IMPLEMENTED",
+    "mechanical_loaded_and_long_term_acceptance": "NOT_QUALIFIED"
+  },
+  "assets": [
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.12-ota.bin",
+      "bytes": 2355200,
+      "sha256": "d65c7033bdfe1a558be9041f127a7b217ff9215a9108f9a714aa69e23d21d945",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.12/followcore-can-s3-v3.0.0-rc.12-ota.bin"
+    },
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.12-web.zip",
+      "bytes": 641719,
+      "sha256": "43f0c08798677d7b50f62d242c4019df643810e52956a8f77df29eae30e52f1a",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.12/followcore-can-s3-v3.0.0-rc.12-web.zip"
+    },
+    {
+      "file": "followcore-can-v3.0.0-rc.12-notices.zip",
+      "bytes": 46198,
+      "sha256": "97223fbaf44799a62d75623e5ef4e0fbfffd597abdacb6933e313a1d8ddc9c5b",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.12/followcore-can-v3.0.0-rc.12-notices.zip"
+    }
+  ]
+}
