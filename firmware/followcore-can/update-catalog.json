@@ -6,7 +6,7 @@
   "controller_hardware": "ESP-V3.003",
   "stable": null,
   "testing": {
-    "s3": {"version": "v3.0.0-rc.3", "notes": "FollowCore-CAN identity and support information; candidate build."},
+    "s3": {"version": "v3.0.0-rc.5", "notes": "MCU version checks, network error diagnostics, top-position gate and explicit cancellation."},
     "f303": {"version": "v3.0.0-rc.3", "notes": "Version identity only; no motor-control or PDO changes."}
   }
 }

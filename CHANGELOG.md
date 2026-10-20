@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.0.0-rc.5 — FollowCore-CAN S3 only
+
+- Add explicit MCU-side HTTPS version checks, optional testing releases and
+  independent S3/F303 version comparisons. Direct download/install is not included.
+- Report HTTP 404/403/429/50x, DNS, timeout, TLS/certificate and catalog failures
+  on the update page and explicit serial diagnostics, not as CAN/motor faults.
+- Require a safe, homed and stationary MinPost before ordinary networking;
+  page navigation retains the motion lock until explicit cancellation.
+- Keep wired recovery separate; no wireless isolation bypass. Defer ordinary
+  parameter saves while maintenance owns the system.
+- Read optional standard 100A driver software metadata once per peer session;
+  missing metadata does not revoke motor/homing eligibility.
+- Keep the compatible F303 at rc.3 without algorithm/PDO/current-limit changes.
+- Host/UI/build and safe boot observations passed; MCU Internet connectivity,
+  TLS peak runtime stacks, mechanical and long-term behavior are not qualified.
+
 ## v3.0.0-rc.3 — FollowCore-CAN
 
 - Identify both controller and driver software as FollowCore-CAN.
