@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Private support and security reports
+    url: mailto:sapphiresaiv@gmail.com
+    about: Do not disclose credentials or sensitive logs in a public issue.

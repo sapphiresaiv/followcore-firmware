@@ -1,0 +1,10 @@
+name: Feature request
+description: Suggest an improvement without implying a planned feature already exists.
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Use case and proposed behavior
+      description: Include the relevant control variant and hardware.
+    validations:
+      required: true

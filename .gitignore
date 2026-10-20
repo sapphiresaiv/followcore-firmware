@@ -1,0 +1,9 @@
+*.bin
+*.elf
+*.map
+*.zip
+*.pem
+*.key
+__pycache__/
+.DS_Store
+.build/

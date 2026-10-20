@@ -1,0 +1,37 @@
+name: Bug report
+description: Report a reproducible FollowCore problem without private data.
+body:
+  - type: dropdown
+    id: variant
+    attributes:
+      label: Control variant
+      options:
+        - FollowCore-CAN
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Hardware and firmware
+      description: Controller hardware, S3 version, F303 version/build, and connected driver.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Operating mode and reproduction
+      description: Exact steps, error name/code, expected behavior, and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Screenshots/logs, capture rate, and known gaps. Remove passwords, tokens, and identifiers.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: I removed credentials and personal/device-identifying details.
+          required: true
