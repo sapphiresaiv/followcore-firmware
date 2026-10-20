@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.0.0-rc.7 — FollowCore-CAN S3 only
+
+- Permit first-use networking before lead/laser calibration or homing, using
+  owner-confirmed stationary feedback or proven local CAN quiescence. Unresolved
+  motion still blocks networking; referenced devices still require MinPost.
+- Adopt the first-boot maintenance lease without unlocking motion.
+- Show Connect network on the offline Version tab and route to Wi-Fi search.
+- Add direct STA/selection-to-hotspot switching under the same maintenance lease;
+  identify USB recovery separately from local hotspot upload.
+- Reduce normal diagnostics to initialization, hardware, communication and
+  control summaries. Keep detailed engineering evidence in explicit diagnostics.
+- Remove engineering-oriented user prompts. Preserve navigation locks and
+  explicit cancellation, signed image validation and rollback checks.
+- No F303 update, motor algorithm, PDO layout, homing or current-limit changes.
+- This remains a candidate, not mechanical or long-term qualification.
+
 ## v3.0.0-rc.5 — FollowCore-CAN S3 only
 
 - Add explicit MCU-side HTTPS version checks, optional testing releases and

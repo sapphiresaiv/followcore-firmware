@@ -1,9 +1,9 @@
 # Controller-side version checking
 
-The S3 `v3.0.0-rc.5` candidate adds an explicit **Check updates** operation on
-the S3 itself. The browser mirror only displays the S3 result. The installed
-`v3.0.0-rc.3` did not have this operation; do not mistake local hotspot upload
-for Internet version checking.
+The S3 adds an explicit **Check updates** operation on the S3 itself. The browser
+mirror only displays the S3 result. In `v3.0.0-rc.7`, an offline Version tab
+offers **Connect network**, opening Wi-Fi search/selection. Local hotspot upload
+is separate from Internet version checking.
 
 The public catalog is
 `firmware/followcore-can/update-catalog.json`. It is ASCII JSON, at most 4096
@@ -20,11 +20,16 @@ An alternative distribution host requires a separately reviewed official endpoin
 
 ## Safety and cancellation
 
-Ordinary Wi-Fi, hotspot and version checks require a valid homing reference,
-confirmed travel limits, a safe main state and a stopped axis within 0.1 mm of
-MinPost. The existing CAN owner's fresh stationary evidence is still required.
-The program does not move the axis to acquire this qualification. Wired
-isolation recovery is separate and does not grant wireless permission.
+Before a mechanical reference exists, initial networking does not require
+lead/laser calibration or motion permission. The existing CAN owner must prove
+fresh stationary feedback or local CAN quiescence with no unresolved motion.
+First-boot local maintenance is adopted without releasing the motion lock.
+Local silence is not a measurement of mechanical position or motor health.
+
+After a reference is established, networking still requires confirmed travel
+limits, a safe main state and a stopped axis within 0.1 mm of MinPost. The
+program does not move the axis to obtain this qualification. Wired isolation
+recovery is separate and does not grant wireless permission by itself.
 
 Navigation away from the page does not cancel maintenance or allow motion.
 Use the explicitly labelled cancellation action. Cleanup precedes lease release;
@@ -49,8 +54,9 @@ failure, lost permission and disconnection never resume old motion.
 | 13 | Explicit cancellation or lost local authorization |
 | 14 | Local firmware version is not qualified for comparison |
 
-The update page and explicit serial mirror retain the latest result, HTTP
-status, SDK error, TLS/mbedTLS error, certificate flags and socket errno.
+The update page shows a concise failure reason and HTTP status where available.
+Explicit serial diagnostics retain the SDK error, TLS/mbedTLS error, certificate
+flags and socket errno; normal diagnostics show four current status summaries.
 HTTP 0 means no HTTP response was obtained. Codes identify the observed failure,
 not proof of a particular ISP, country, hardware fault or motor-driver refusal.
 Network-check errors are not CAN EMCY/motion faults and do not write a motor

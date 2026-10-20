@@ -33,6 +33,7 @@ def main():
     p.add_argument("--driver-version", help="Previously published compatible driver version")
     p.add_argument("--s3-only", action="store_true", help="Reference, but do not republish, the unchanged driver")
     p.add_argument("--github-check", action="store_true", help="This S3 implements version checking, not online installation")
+    p.add_argument("--commissioning-ui", action="store_true", help="This revision fixes first-use maintenance and simplifies the UI")
     p.add_argument("--s3-web", type=Path, required=True)
     p.add_argument("--validation", type=Path, required=True, help="Reviewed public validation JSON; never infer PASS from a build")
     args = p.parse_args()
@@ -169,6 +170,40 @@ Host/simulated-error/UI/build evidence and real-device limitations are in the
 reviewed validation record. Real regional Internet reachability, mechanical
 homing/contact force, loaded/weak-signal behavior and long-term reliability are
 not certified by these tests. See docs/update-check.md and compatibility docs.
+
+Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
+Download the accompanying third-party notices. Upstream licenses remain valid.
+"""
+        (out / "RELEASE_NOTES.md").write_text(notes)
+    if args.commissioning_ui:
+        if not args.s3_only:
+            raise ValueError("Commissioning UI release must leave the driver unchanged")
+        notes = f"""# FollowCore-CAN {version}
+
+Pre-release for controlled evaluation, not stable or production qualified.
+S3 {version}, source `{components['s3']['commit']}`.
+Compatible unchanged F303: {driver_version}, source `{components['f303']['commit']}`.
+Only S3 and its matching browser UI are updated.
+
+Fix first-use networking before mechanical/laser calibration or homing. The CAN
+owner must still confirm stationary feedback or local quiescence with no
+unresolved motion. Referenced devices still require safe MinPost parking.
+First-boot maintenance is adopted without releasing the motion lock.
+
+Offline Version now opens Wi-Fi search. Upgrade offers a local upload hotspot,
+including switching from STA without releasing maintenance; USB recovery is
+identified separately. Normal diagnostics show four current status summaries;
+engineering evidence remains available through explicit diagnostics. Navigation
+still retains maintenance until explicit cancellation and cleanup.
+
+No F303 rebuild, motor algorithm, PDO layout, homing threshold or current-limit
+change. Signed OTA validation and rollback checks are retained. Direct GitHub
+download/install and automatic F303 updating are NOT implemented.
+
+See release-manifest.json for actual tests and limitations. Limited host/UI and
+device network checks do not qualify mechanical, loaded, regional Internet or
+long-term behavior. Use the matching signed image and browser package; do not
+guess addresses or erase NVS. Private keys, sources and raw captures are absent.
 
 Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
 Download the accompanying third-party notices. Upstream licenses remain valid.

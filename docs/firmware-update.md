@@ -39,11 +39,14 @@ Verify reported versions. Exit maintenance and explicitly restore control as
 instructed locally; repeat homing before ordinary motion. Do not resume an old
 movement automatically.
 
-S3 rc.5 adds explicit [controller-side version checks](update-check.md), after
-homing and returning to MinPost. Navigation does not cancel the maintenance lock;
-use the explicitly labelled cancellation action. First-boot local maintenance must
-be explicitly cancelled before restoring control and homing. Physical isolation
-recovery remains wired; it does not authorize wireless operation.
+S3 rc.7 supports initial setup networking before calibration/homing, using
+owner-confirmed stationary feedback or local quiescence. Once referenced,
+ordinary networking still requires returning to MinPost. [Read the admission rules](update-check.md).
+The Version tab routes an offline user to Wi-Fi. The Upgrade tab can start or
+switch to the local upload hotspot; fault recovery uses USB and a computer.
+Navigation does not cancel the maintenance lock: use Cancel upgrade or End
+maintenance. Explicitly end first-boot maintenance before restoring control and
+homing. Physical isolation alone does not authorize wireless operation.
 
 Direct GitHub download/install is not implemented. F303 is only compared and
 reported, not automatically updated by S3. Keep the signed local upload method
