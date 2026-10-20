@@ -38,6 +38,7 @@ def main():
     p.add_argument("--update-errors", action="store_true", help="This revision adds visible query failure categories and explicit RAM diagnostics")
     p.add_argument("--async-tls-fix", action="store_true", help="This revision corrects pinned SDK async connection polling and error forwarding")
     p.add_argument("--network-profile-ui", action="store_true", help="This revision adds remembered Wi-Fi and global connection/navigation feedback")
+    p.add_argument("--dns-presets", action="store_true", help="This S3-only revision adds named DNS presets and asynchronous lookup diagnostics")
     p.add_argument("--s3-web", type=Path, required=True)
     p.add_argument("--validation", type=Path, required=True, help="Reviewed public validation JSON; never infer PASS from a build")
     args = p.parse_args()
@@ -53,6 +54,9 @@ def main():
     if args.network_profile_ui and (not args.s3_only or any((args.commissioning_ui,
             args.button_feedback, args.update_errors, args.async_tls_fix))):
         raise ValueError("Network profile/UI update requires S3-only release notes")
+    if args.dns_presets and (not args.s3_only or any((args.commissioning_ui,args.button_feedback,
+            args.update_errors,args.async_tls_fix,args.network_profile_ui))):
+        raise ValueError("DNS presets require separate S3-only release notes")
     validation = json.loads(args.validation.read_text())
     if validation.get("version") != version or validation.get("variant") != "FollowCore-CAN":
         raise ValueError("Validation record does not belong to this candidate")
@@ -350,6 +354,42 @@ S/N/Q, CAN/PDO, drive algorithms, homing and current limits remain unchanged.
 Direct GitHub device download/install and automatic F303 updating remain
 unavailable. See release-manifest.json for actual validation and limitations.
 Use the signed S3 OTA image; do not erase NVS or guess flash addresses.
+
+Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
+Download the accompanying third-party notices. Upstream licenses remain valid.
+"""
+        (out / "RELEASE_NOTES.md").write_text(notes)
+    if args.dns_presets:
+        notes = f"""# FollowCore-CAN {version}
+
+Pre-release for controlled evaluation, not stable or production qualified.
+S3 {version}, source `{components['s3']['commit']}`.
+Compatible unchanged F303: {driver_version}, source `{components['f303']['commit']}`.
+Only S3 requires an update. Refresh the matching browser bundle after installing.
+
+Choose Automatic (DHCP/router), AliDNS, Google Public DNS or Cloudflare in Wi-Fi.
+No manual IP entry is required. An explicit choice is saved separately in NVS;
+unchanged choices do not rewrite. Changing a choice closes idle Wi-Fi and keeps
+the maintenance lock. Reconnect explicitly. No automatic boot-time networking.
+Queries/feedback and RF transitions reject changes until idle.
+
+Apply and read back the selected servers before outbound jobs. A bounded,
+nonblocking DNS preflight retains the configured servers, lookup time/error and
+resolved IPv4 separately from the later TCP/TLS connection. Detailed evidence
+is available only on explicit serial UPDATE GET; ordinary status remains quiet.
+Resolver cancellation is safe for late SDK callbacks. N and Q add read-only
+tails; previous indices are unchanged and updated readers accept old frames.
+
+Retain HTTPS hostname, time and CA verification. Do not pin a GitHub IP or
+downgrade HTTP. Ordinary plaintext DNS is not encrypted DNS, an anti-poisoning
+guarantee or proof that GitHub will be reachable on a given network.
+The existing browser link diagnostics, unique granted-port selection, EOF
+cleanup and content-hashed resource bundle are included.
+
+No F303 rebuild, CAN/PDO, motion, homing or current-limit changes.
+Direct device download/install and automatic F303 updating remain unavailable.
+See release-manifest.json for actual tests, hardware scope and limitations.
+Use the signed S3 OTA image; do not erase NVS or guess Flash addresses.
 
 Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
 Download the accompanying third-party notices. Upstream licenses remain valid.

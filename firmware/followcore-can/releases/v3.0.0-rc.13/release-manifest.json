@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "product": "FollowCore",
+  "variant": "FollowCore-CAN",
+  "control_type": "CAN",
+  "version": "v3.0.0-rc.13",
+  "channel": "prerelease",
+  "release_tag": "followcore-can-v3.0.0-rc.13",
+  "repository": "sapphiresaiv/followcore-firmware",
+  "controller_hardware": "ESP-V3.003 / ESP32-S3-WROOM-1-N16R8",
+  "paired_driver": "supported STM32F303 project hardware with existing IAP",
+  "components": {
+    "s3": {
+      "version": "v3.0.0-rc.13",
+      "commit": "e355ebf53c9a79d926aed10145711ab18e5a7633",
+      "image_bytes": 2363392,
+      "image_sha256": "445eefc621fc8b82d2a096690e2e45f65d4dc61cca54cb8df5bfa6be872cc1e6",
+      "file": "followcore-can-s3-v3.0.0-rc.13-ota.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.13/followcore-can-s3-v3.0.0-rc.13-ota.bin",
+      "included_in_release": true,
+      "update_required": true
+    },
+    "f303": {
+      "version": "v3.0.0-rc.3",
+      "commit": "fb9b11db6b8e532aa1353cb746daf81ad48e7969",
+      "image_bytes": 100112,
+      "image_sha256": "498371dfb5d8c21e9b9bbc697d781bccb51e1ef22a03207f841f0d989e82f157",
+      "file": "followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.3/followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "included_in_release": false,
+      "update_required": false
+    }
+  },
+  "github_device_ota_available": false,
+  "github_device_check_available": true,
+  "pulse_available": false,
+  "ethercat_available": false,
+  "validation": {
+    "version": "v3.0.0-rc.13",
+    "variant": "FollowCore-CAN",
+    "date": "2026-10-20",
+    "source_commit": "e355ebf53c9a79d926aed10145711ab18e5a7633",
+    "source_freeze": "Final snapshot adds only DNS-save-aware host upgrade admission and its tests; firmware main/ is unchanged from the first candidate snapshot",
+    "host_cpp_groups": 112,
+    "host_cpp_and_adjuncts": "PASS_ASAN_UBSAN; complete control/gateway/motion/homing/maintenance tests plus web, signing, SDK and Python adjuncts",
+    "additional_final_guard_tests": "PASS; 13 OTA serial-update tests reject DNS-save pending and DNS-resolution busy; 6 version/provenance tests pass",
+    "dns_storage_host": "PASS; four allowlisted presets, independent NVS record, fresh readback, unchanged/no rewrite, corrupt size/checksum rejection, explicit commit/read errors; failed commit may already persist new data",
+    "dns_transport_host": "PASS; explicit apply/readback, simulated DHCP replacement, automatic baseline restoration, set/get failures, mismatched readback rejection and RF stop despite DNS-cleanup failure",
+    "dns_resolver_host": "PASS; nonblocking callbacks, queue failure, bounded timeout, late completion, cancellation and two-slot lifetime safety; no extra task or blocking getaddrinfo",
+    "maintenance_integration_host": "PASS; selection waits for fresh owner admission, cancellation prevents NVS write, save errors remain explicit and the mechanical lease stays locked",
+    "native_lvgl": "PASS; four named choices without IP input, confirmed selection/default restoration, busy gating, header/network/navigation, query controls and refresh regressions",
+    "wasm_lvgl": "PASS; dynamic allocation and S3-equivalent 192KiB fixed pool; complete existing smoke regressions",
+    "serial_protocol": "PASS; N appends provider/pending, Q appends seven numeric DNS fields; previous indices retained and matching readers accept old frames",
+    "s3_build_signature_provenance": "PASS; final application descriptor, embedded source and signed image match final immutable snapshot and fixed trust anchor",
+    "s3_image_sha256": "445eefc621fc8b82d2a096690e2e45f65d4dc61cca54cb8df5bfa6be872cc1e6",
+    "s3_image_bytes": 2363392,
+    "s3_static_ram_bytes": 93524,
+    "compiler_local_frames": "PASS existing logger/INA limits; individual compiler frames are not a complete TLS/task stack bound",
+    "s3_installed_and_sdk_boot_confirmed": true,
+    "boot_confirmation_ms": 3162,
+    "boot_observation": "PASS; 35 seconds, 150 status frames, invalid CRC 0, one trailing status frame after SYNC STOP; no claim of zero trailing frames",
+    "deployment": "Signed ota_0 installed and SDK-confirmed; prior VALID rc.12 ota_1, NVS, partition table and reserved regions preserved and verified; serial released",
+    "browser_bundle": "Matching four-file content-hashed bundle deployed locally; previous bundle retained",
+    "hardware_dns_ui": "PASS; actual S3 maintenance mirror displays all four choices without IP entry, saved SSID and saved-password placeholder retained; default Automatic left unchanged, Wi-Fi not started and browser serial released",
+    "hardware_dns_provider_reachability": "NOT_TESTED; no automatic outbound DNS-provider/GitHub test and no claim that changing DNS fixes the user's prior connection timeout",
+    "dns_persistence_power_loss": "NOT_QUALIFIED; host storage tests do not establish physical power-loss behavior",
+    "dns_security_limits": "Ordinary plaintext DNS, not DoH/DoT or an anti-poisoning guarantee; configured DNS/readback and preflight IP do not prove actual responder identity or later HTTPS peer",
+    "driver": "v3.0.0-rc.3 unchanged; no driver rebuild, serial query or flash",
+    "motion_can_pdo_homing_current_limits": "UNCHANGED; no mechanical test or movement command in this installation",
+    "direct_github_download_install": "NOT_IMPLEMENTED",
+    "mechanical_loaded_and_long_term_acceptance": "NOT_QUALIFIED"
+  },
+  "assets": [
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.13-ota.bin",
+      "bytes": 2363392,
+      "sha256": "445eefc621fc8b82d2a096690e2e45f65d4dc61cca54cb8df5bfa6be872cc1e6",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.13/followcore-can-s3-v3.0.0-rc.13-ota.bin"
+    },
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.13-web.zip",
+      "bytes": 643657,
+      "sha256": "f3711edf8a31a91b3cca499819af9e03c32522d196cc42cae663215c80aeaffe",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.13/followcore-can-s3-v3.0.0-rc.13-web.zip"
+    },
+    {
+      "file": "followcore-can-v3.0.0-rc.13-notices.zip",
+      "bytes": 46198,
+      "sha256": "97223fbaf44799a62d75623e5ef4e0fbfffd597abdacb6933e313a1d8ddc9c5b",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.13/followcore-can-v3.0.0-rc.13-notices.zip"
+    }
+  ]
+}

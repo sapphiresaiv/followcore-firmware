@@ -26,3 +26,18 @@ physical persistence uncertain; it is not reported as a motor/CAN fault.
 
 Install the matching S3 browser bundle and refresh the page after updating;
 older browser bundles can reject the extended read-only U mirror.
+
+From S3 v3.0.0-rc.13 the Wi-Fi tab also offers named DNS presets:
+Automatic (the router/DHCP default), AliDNS, Google Public DNS, and Cloudflare.
+Select a name; no IP typing is needed. The explicit choice is saved separately
+from credentials. Changing it closes idle Wi-Fi and keeps maintenance locked;
+reconnect, then retry Check updates. Active queries/feedback and RF transitions
+temporarily disable selection. Automatic restores the next connection's router
+DNS; no Wi-Fi connection is started automatically on boot.
+
+The update check separately identifies DNS lookup failure/timeout and later
+connection/TLS/HTTP failures. Engineering lookup evidence is retained for an
+explicit serial diagnostic read, not a continual serial stream. A resolved IP
+is not proof that HTTPS or GitHub works. These presets use ordinary plaintext
+DNS, not encrypted DNS or a guarantee against interception. A provider's name
+does not select a country endpoint. HTTPS certificate/hostname checks stay on.

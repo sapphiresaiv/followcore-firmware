@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.0.0-rc.13 — FollowCore-CAN S3 only
+
+- Add named Automatic, AliDNS, Google and Cloudflare presets; no IP keyboard.
+- Persist the explicit choice independently; reconnect after a change, retaining
+  maintenance. Reject changes during queries/feedback or RF transitions.
+- Apply/read back selected servers before jobs; distinguish bounded asynchronous
+  DNS lookup from later TCP/TLS/HTTP progress and retain explicit diagnostic evidence.
+- Append validated N/Q tails and include the matching content-hashed web bundle
+  with connection diagnostics, granted-port reuse and correct EOF cleanup.
+- Preserve HTTPS verification. Plain DNS does not guarantee regional GitHub access.
+- No F303, CAN/PDO, motion, homing or current-limit changes.
+
 ## v3.0.0-rc.12 — FollowCore-CAN S3 only
 
 - Remember the last successfully connected SSID/password as one NVS record;
