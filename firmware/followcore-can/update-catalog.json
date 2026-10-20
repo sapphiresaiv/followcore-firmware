@@ -6,7 +6,7 @@
   "controller_hardware": "ESP-V3.003",
   "stable": null,
   "testing": {
-    "s3": {"version": "v3.0.0-rc.12", "notes": "rc.13 DNS presets withdrawn pending fix; rc.12 uses automatic DNS. S3 only."},
+    "s3": {"version": "v3.0.0-rc.14", "notes": "Fix DNS preset/close 0x5001; preserves safety gates. S3 only; see validation limits."},
     "f303": {"version": "v3.0.0-rc.3", "notes": "Version identity only; no motor-control or PDO changes."}
   }
 }
