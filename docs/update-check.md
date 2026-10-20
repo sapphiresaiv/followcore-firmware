@@ -5,6 +5,13 @@ mirror only displays the S3 result. In `v3.0.0-rc.7`, an offline Version tab
 offers **Connect network**, opening Wi-Fi search/selection. Local hotspot upload
 is separate from Internet version checking.
 
+From `v3.0.0-rc.8`, an accepted check immediately displays **正在查询** and
+disables the query button and channel selector until completion or failure.
+Repeated clicks do not submit more requests. Explicit cancellation is still
+available; navigation alone does not cancel a query or release maintenance.
+Search, network switching and feedback controls also show their accepted busy
+states, with shared pressed/disabled button visuals in both interfaces.
+
 The public catalog is
 `firmware/followcore-can/update-catalog.json`. It is ASCII JSON, at most 4096
 bytes, with schema/product/variant/control/hardware identity and two channels.

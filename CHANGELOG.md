@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.0.0-rc.8 — FollowCore-CAN S3 only
+
+- Show an immediate querying label and disabled state during queued, clock and
+  fetching phases; restore controls on completion/failure and reject repeat clicks.
+- Keep explicit cancellation usable during queries and connection/search work.
+- Reflect accepted search, connection, hotspot and feedback states immediately.
+- Add consistent pressed/disabled visuals to shared buttons, including arrows,
+  without changing motion-control press/release semantics.
+- Retain rc.7 initial-setup networking and existing backend duplicate admission.
+- No F303 rebuild, protocol layout, homing, current-limit or motor changes.
+- This remains a candidate, not regional Internet or long-term qualification.
+
 ## v3.0.0-rc.7 — FollowCore-CAN S3 only
 
 - Permit first-use networking before lead/laser calibration or homing, using

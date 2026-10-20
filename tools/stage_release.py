@@ -34,6 +34,7 @@ def main():
     p.add_argument("--s3-only", action="store_true", help="Reference, but do not republish, the unchanged driver")
     p.add_argument("--github-check", action="store_true", help="This S3 implements version checking, not online installation")
     p.add_argument("--commissioning-ui", action="store_true", help="This revision fixes first-use maintenance and simplifies the UI")
+    p.add_argument("--button-feedback", action="store_true", help="This revision fixes query and shared button feedback")
     p.add_argument("--s3-web", type=Path, required=True)
     p.add_argument("--validation", type=Path, required=True, help="Reviewed public validation JSON; never infer PASS from a build")
     args = p.parse_args()
@@ -204,6 +205,38 @@ See release-manifest.json for actual tests and limitations. Limited host/UI and
 device network checks do not qualify mechanical, loaded, regional Internet or
 long-term behavior. Use the matching signed image and browser package; do not
 guess addresses or erase NVS. Private keys, sources and raw captures are absent.
+
+Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
+Download the accompanying third-party notices. Upstream licenses remain valid.
+"""
+        (out / "RELEASE_NOTES.md").write_text(notes)
+    if args.button_feedback:
+        if not args.s3_only or args.commissioning_ui:
+            raise ValueError("Button feedback is an S3-only release with its own notes")
+        notes = f"""# FollowCore-CAN {version}
+
+Pre-release for controlled evaluation, not stable or production qualified.
+S3 {version}, source `{components['s3']['commit']}`.
+Compatible unchanged F303: {driver_version}, source `{components['f303']['commit']}`.
+Only S3 and its matching browser UI are updated.
+
+Accepted update checks immediately display a querying label and disable both
+the button and channel selector throughout queued/clock/fetching states.
+Completion or failure restores the controls. UI and backend independently
+reject repeat requests; explicit cancellation remains usable during a query.
+Search, connection, hotspot and feedback controls reflect accepted service
+states immediately. Shared buttons have consistent pressed and disabled
+visuals, including directional controls. No motion button event semantics,
+network admission, wire layout, PDO, homing or current-limit changes.
+
+First-use network setup and opt-in testing-channel checks from rc.7 are retained.
+Direct GitHub download/install and automatic F303 updating are NOT implemented.
+Use the matching signed image and browser package; do not erase NVS or guess
+flash addresses. Private keys, MCU source, ELF and raw captures are excluded.
+
+Actual tests and limitations are recorded in release-manifest.json. Simulated
+query/HTTP errors and UI tests are not proof of regional Internet access,
+mechanical safety, loaded behavior or long-term reliability.
 
 Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
 Download the accompanying third-party notices. Upstream licenses remain valid.
