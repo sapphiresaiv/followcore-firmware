@@ -6,7 +6,7 @@
   "controller_hardware": "ESP-V3.003",
   "stable": null,
   "testing": {
-    "s3": {"version": "v3.0.0-rc.12", "notes": "Remember Wi-Fi, show connection icon and fix maintenance navigation; S3 only."},
+    "s3": {"version": "v3.0.0-rc.13", "notes": "Named DNS presets and lookup diagnostics; matching web update; S3 only."},
     "f303": {"version": "v3.0.0-rc.3", "notes": "Version identity only; no motor-control or PDO changes."}
   }
 }
