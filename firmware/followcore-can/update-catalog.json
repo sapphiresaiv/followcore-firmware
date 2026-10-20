@@ -6,7 +6,7 @@
   "controller_hardware": "ESP-V3.003",
   "stable": null,
   "testing": {
-    "s3": {"version": "v3.0.0-rc.9", "notes": "Visible query failure categories, action hints and explicit read-only diagnostics; S3 only."},
+    "s3": {"version": "v3.0.0-rc.10", "notes": "Correct async connection timeout recovery and error forwarding; S3 only."},
     "f303": {"version": "v3.0.0-rc.3", "notes": "Version identity only; no motor-control or PDO changes."}
   }
 }
