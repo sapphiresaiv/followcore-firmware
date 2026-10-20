@@ -40,6 +40,9 @@ def main():
         f"followcore-can-f303-{args.version}-app.bin", f"followcore-can-s3-{args.version}-web.zip",
         f"followcore-can-f303-{args.version}-web.zip", f"followcore-can-f303-{args.version}-update-tools.zip",
         f"followcore-can-{args.version}-notices.zip", "release-manifest.json", "RELEASE_NOTES.md", "SHA256SUMS"}
+    if manifest.get("components", {}).get("f303", {}).get("included_in_release") is False:
+        allowed -= {f"followcore-can-f303-{args.version}-app.bin",
+            f"followcore-can-f303-{args.version}-web.zip", f"followcore-can-f303-{args.version}-update-tools.zip"}
     if set(expected) != allowed:
         raise ValueError("Unexpected public asset; source/debug/key files are never allowed")
     for name, digest in expected.items():

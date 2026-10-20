@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "product": "FollowCore",
+  "variant": "FollowCore-CAN",
+  "control_type": "CAN",
+  "controller_hardware": "ESP-V3.003",
+  "stable": null,
+  "testing": {
+    "s3": {"version": "v3.0.0-rc.3", "notes": "FollowCore-CAN identity and support information; candidate build."},
+    "f303": {"version": "v3.0.0-rc.3", "notes": "Version identity only; no motor-control or PDO changes."}
+  }
+}
