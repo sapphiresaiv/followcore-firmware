@@ -6,7 +6,7 @@
   "controller_hardware": "ESP-V3.003",
   "stable": null,
   "testing": {
-    "s3": {"version": "v3.0.0-rc.5", "notes": "MCU version checks, network error diagnostics, top-position gate and explicit cancellation."},
+    "s3": {"version": "v3.0.0-rc.7", "notes": "Initial setup Wi-Fi/hotspot, concise diagnostics and explicit cancellation; S3 only."},
     "f303": {"version": "v3.0.0-rc.3", "notes": "Version identity only; no motor-control or PDO changes."}
   }
 }
