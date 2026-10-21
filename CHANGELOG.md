@@ -1,5 +1,13 @@
 # Changelog
 
+## v3.0.0-rc.15 — FollowCore-CAN S3 OTA exercise
+
+- Version-only candidate based on rc.14; the firmware source diff is VERSION only.
+- No functional fix: network reachability, TCP/TLS uncertainty and other rc.14
+  limitations remain. F303 stays at rc.3 and does not require updating.
+- Prepared for operator-run local-hotspot OTA; not pre-flashed or claimed as
+  hardware-accepted by this release task. See the signed BIN and validation record.
+
 ## v3.0.0-rc.14 — FollowCore-CAN S3 only
 
 - Fix rc.13 preset setup and closing stuck at `0x5001`: ESP-NETIF does not

@@ -40,6 +40,7 @@ def main():
     p.add_argument("--network-profile-ui", action="store_true", help="This revision adds remembered Wi-Fi and global connection/navigation feedback")
     p.add_argument("--dns-presets", action="store_true", help="This S3-only revision adds named DNS presets and asynchronous lookup diagnostics")
     p.add_argument("--dns-empty-fix", action="store_true", help="This revision corrects rc.13 empty DNS set/restore and close failure")
+    p.add_argument("--version-only", action="store_true", help="S3 OTA exercise: only VERSION differs from the reviewed base commit")
     p.add_argument("--s3-web", type=Path, required=True)
     p.add_argument("--validation", type=Path, required=True, help="Reviewed public validation JSON; never infer PASS from a build")
     args = p.parse_args()
@@ -60,9 +61,23 @@ def main():
         raise ValueError("DNS presets require separate S3-only release notes")
     if args.dns_empty_fix and not args.dns_presets:
         raise ValueError("DNS empty-entry correction requires the DNS preset notes")
+    if args.version_only and (not args.s3_only or any((args.commissioning_ui,
+            args.button_feedback,args.update_errors,args.async_tls_fix,args.network_profile_ui,
+            args.dns_presets,args.dns_empty_fix))):
+        raise ValueError("Version-only requires separate S3-only release notes")
     validation = json.loads(args.validation.read_text())
     if validation.get("version") != version or validation.get("variant") != "FollowCore-CAN":
         raise ValueError("Validation record does not belong to this candidate")
+    if args.version_only:
+        import subprocess
+        base=validation.get("version_only_base_commit","")
+        if not re.fullmatch(r"[0-9a-f]{40}",base):
+            raise ValueError("Version-only requires an exact reviewed base commit")
+        record=json.loads((args.s3/"releases"/version/"manifest.json").read_text())
+        changed=subprocess.check_output(["git","-C",str(args.s3),"diff","--name-only",
+            base,record["commit"]],text=True).splitlines()
+        if changed != ["VERSION"]:
+            raise ValueError("Version-only source contains other changes")
     out = ROOT / ".build" / version
     out.mkdir(parents=True, exist_ok=False)
     tag = "followcore-can-" + version
@@ -407,6 +422,34 @@ Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
 Download the accompanying third-party notices. Upstream licenses remain valid.
 """
         (out / "RELEASE_NOTES.md").write_text(notes)
+    if args.version_only:
+        notes=f"""# FollowCore-CAN {version}
+
+Version-only pre-release for an operator-run local OTA exercise, not a new
+functional release or production qualification. S3 {version}, source
+`{components['s3']['commit']}`. The exact source diff against the reviewed
+rc.14 base is VERSION only; generated build identity also changes.
+
+Compatible unchanged F303: {driver_version}, source `{components['f303']['commit']}`.
+Do not update the driver for this test. Motor control, CAN/PDO, homing, current
+limits, Wi-Fi/DNS/TLS behavior, storage, partition layout and trust anchor are
+unchanged. Existing rc.14 issues and qualification limits remain applicable.
+
+Download `followcore-can-s3-{version}-ota.bin` on the computer, then use the
+controller's existing local-hotspot upload workflow. The Version tab can compare
+the testing catalog, but direct GitHub device download/install is not implemented.
+Keep HTTPS/signature checks enabled; an Internet failure is not a successful update.
+
+This candidate has not been flashed or hardware-tested by the publisher in this
+release task; the operator will perform the OTA exercise. Verify the displayed
+{version} after reboot. See release-manifest.json for build/signature evidence.
+The browser bundle is unchanged from rc.14 and does not require replacing an
+already matching rc.14 bundle. Do not erase NVS or guess Flash addresses.
+
+Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
+Download the accompanying third-party notices. Upstream licenses remain valid.
+"""
+        (out/"RELEASE_NOTES.md").write_text(notes)
     sums = "".join(sha(f) + "  " + f.name + "\n" for f in sorted(out.iterdir()))
     (out / "SHA256SUMS").write_text(sums)
     public = ROOT / "firmware/followcore-can/releases" / version
