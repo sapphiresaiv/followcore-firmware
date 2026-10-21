@@ -68,7 +68,7 @@ on online download. Fixed signing trust and motor/driver control are unchanged.
 download/validation/install testing. Original rc.16/17 Release assets remain
 immutable; their downloader has the documented request-size defect.
 [Read the update workflow and its limits](docs/firmware-update.md).
-[Hardware acceptance and corrected download-failure evidence](docs/qualification/online-ota-2026-10-21.md).
+[Current rc.18 hardware acceptance and network limitations](docs/qualification/online-ota-rc18-2026-10-21.md).
 S3 OTA does not update the F303 driver. Universal servo compatibility and
 CANopen/EtherCAT safety or conformance certification are not claimed.
 

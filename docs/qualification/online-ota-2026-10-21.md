@@ -4,6 +4,10 @@ Scope: FollowCore-CAN controller ESP-V3.003, rc.16 bootstrap and rc.17 target.
 Driver rc.3 is unchanged. No driver serial access, enable, homing, CAN target,
 motor tuning or mechanical test was performed in this acceptance task.
 
+Historical rc.16/17 result. See the [rc.18 correction and current hardware
+handoff](online-ota-rc18-2026-10-21.md) for the subsequently installed controller
+and independently retained connection failures.
+
 ## Published artifacts and source
 
 - rc.16 original frozen source: `799deb82e53b4479e55f59edb6e52328e4d3b33e`.
@@ -76,7 +80,7 @@ bootstrap success are not substitutes. Power-interruption, loaded motion and
 long-term reliability are also outside this result. Packaging-time manifests
 correctly say that this later online hardware acceptance had not yet run.
 
-## Handoff
+## Original rc.16 handoff (superseded by rc.18 report)
 
 Controller rc.16 stays in maintenance with its successful rc.17 catalog result and
 visible download failure. No automatic motion recovery is attempted. The normal
