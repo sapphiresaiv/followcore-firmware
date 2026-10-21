@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "product": "FollowCore",
+  "variant": "FollowCore-CAN",
+  "control_type": "CAN",
+  "version": "v3.0.0-rc.19",
+  "channel": "prerelease",
+  "release_tag": "followcore-can-v3.0.0-rc.19",
+  "repository": "sapphiresaiv/followcore-firmware",
+  "controller_hardware": "ESP-V3.003 / ESP32-S3-WROOM-1-N16R8",
+  "paired_driver": "supported STM32F303 project hardware with existing IAP",
+  "components": {
+    "s3": {
+      "version": "v3.0.0-rc.19",
+      "commit": "94bf56d99c058189b843f407ea273bff92728d9b",
+      "image_bytes": 2375680,
+      "image_sha256": "937671ba3d3f2b78e1fddbce2ab8ac69991546716c8d65d27140ce7aece848e7",
+      "file": "followcore-can-s3-v3.0.0-rc.19-ota.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.19/followcore-can-s3-v3.0.0-rc.19-ota.bin",
+      "included_in_release": true,
+      "update_required": true
+    },
+    "f303": {
+      "version": "v3.0.0-rc.3",
+      "commit": "fb9b11db6b8e532aa1353cb746daf81ad48e7969",
+      "image_bytes": 100112,
+      "image_sha256": "498371dfb5d8c21e9b9bbc697d781bccb51e1ef22a03207f841f0d989e82f157",
+      "file": "followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.3/followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "included_in_release": false,
+      "update_required": false
+    }
+  },
+  "github_device_ota_available": true,
+  "github_device_check_available": true,
+  "pulse_available": false,
+  "ethercat_available": false,
+  "validation": {
+    "version": "v3.0.0-rc.19",
+    "variant": "FollowCore-CAN",
+    "date": "2026-10-21",
+    "source_commit": "94bf56d99c058189b843f407ea273bff92728d9b",
+    "version_only_base_commit": "35211229d65b7f8ecbedb93c0f00f7cd2934b842",
+    "source_changed_paths": [
+      "VERSION"
+    ],
+    "source_review": "PASS; frozen commit-to-commit source difference from corrected rc.18 is VERSION only",
+    "s3_build": "PASS; clean release build 213.94s; frozen source guard before/after compilation",
+    "s3_signature_provenance": "PASS; fixed RSA-3072/PSS key, exact application descriptor and frozen source identity verified",
+    "s3_image_sha256": "937671ba3d3f2b78e1fddbce2ab8ac69991546716c8d65d27140ce7aece848e7",
+    "s3_image_bytes": 2375680,
+    "s3_static_ram_bytes": 103068,
+    "functional_base_tests": "rc.18 full 113-group C++ ASAN/UBSAN and protocol/Python/signing/SDK/feedback adjuncts PASS. Not a separate 113-group run on VERSION-only rc.19.",
+    "web_bundle": "Byte-identical to rc.18/rc.16",
+    "online_hardware": "NOT_RUN at packaging; published target for explicit direct rc.18-to-rc.19 online acceptance",
+    "driver": "rc.3 unchanged; no driver serial access, parameters, build or flash",
+    "motion_can_homing_limits": "UNCHANGED",
+    "network_limit": "Direct ESP32 access depends on actual network; no HTTPS/signature bypass",
+    "power_loss_mechanical_and_long_term_reliability": "NOT_QUALIFIED"
+  },
+  "assets": [
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.19-ota.bin",
+      "bytes": 2375680,
+      "sha256": "937671ba3d3f2b78e1fddbce2ab8ac69991546716c8d65d27140ce7aece848e7",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.19/followcore-can-s3-v3.0.0-rc.19-ota.bin"
+    },
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.19-web.zip",
+      "bytes": 648884,
+      "sha256": "76f8aa4c82f177d9d2fcaa47e97bebac9606b38e705a102416c1fca2232b22f1",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.19/followcore-can-s3-v3.0.0-rc.19-web.zip"
+    },
+    {
+      "file": "followcore-can-v3.0.0-rc.19-notices.zip",
+      "bytes": 46198,
+      "sha256": "97223fbaf44799a62d75623e5ef4e0fbfffd597abdacb6933e313a1d8ddc9c5b",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.19/followcore-can-v3.0.0-rc.19-notices.zip"
+    }
+  ]
+}

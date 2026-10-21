@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.0.0-rc.19 — Corrected online OTA exercise target
+
+- VERSION-only target on the corrected rc.18 base; exact source difference verified.
+- Use rc.18 or newer for the direct GitHub download test; driver stays at rc.3.
+- Download verification and installation remain separate explicit steps.
+
 ## v3.0.0-rc.18 — FollowCore-CAN online download request correction
 
 - Correct the 512-byte TX buffer that rejects long GitHub signed redirect requests.
