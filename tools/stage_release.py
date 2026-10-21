@@ -42,6 +42,7 @@ def main():
     p.add_argument("--dns-empty-fix", action="store_true", help="This revision corrects rc.13 empty DNS set/restore and close failure")
     p.add_argument("--version-only", action="store_true", help="S3 OTA exercise: only VERSION differs from the reviewed base commit")
     p.add_argument("--online-ota-ui", action="store_true", help="Signed controller online OTA and independent version cards; driver unchanged")
+    p.add_argument("--download-request-fix", action="store_true", help="Online OTA long signed-URL request fix and stage-specific failures")
     p.add_argument("--s3-web", type=Path, required=True)
     p.add_argument("--validation", type=Path, required=True, help="Reviewed public validation JSON; never infer PASS from a build")
     args = p.parse_args()
@@ -65,6 +66,8 @@ def main():
     if args.online_ota_ui and (not args.s3_only or not args.github_check or any((args.commissioning_ui,
             args.button_feedback,args.update_errors,args.async_tls_fix,args.network_profile_ui,args.dns_presets))):
         raise ValueError("Online OTA requires separate S3-only notes and version checking")
+    if args.download_request_fix and not args.online_ota_ui:
+        raise ValueError("Download request correction requires online OTA release notes")
     if args.version_only and (not args.s3_only or any((args.commissioning_ui,
             args.button_feedback,args.update_errors,args.async_tls_fix,args.network_profile_ui,
             args.dns_presets,args.dns_empty_fix))):
@@ -476,12 +479,50 @@ RSA-3072/PSS signature. No automatic slot selection; first-boot verification and
 rollback remain enabled. Do not erase NVS or bypass HTTPS/signature checks.
 Page navigation keeps the maintenance lock; End maintenance explicitly cancels.
 
-{"This target differs from the reviewed rc.16 base only in VERSION and generated identity; it exercises rc.16 online OTA." if args.version_only else "This is the functional bootstrap that introduces online controller OTA."}
+{"This target differs from its exact reviewed base recorded in validation only in VERSION and generated identity; it exercises that base's online OTA." if args.version_only else "This is the functional bootstrap that introduces online controller OTA."}
 
 See release-manifest.json for the precise validation scope and hardware result.
 Network availability in a VPN-enabled computer does not prove direct access by
 the ESP32. DNS success does not prove TCP/TLS/HTTP success; an interrupted or
 failed download must not be reported as installed or already latest.
+
+Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
+Download the accompanying third-party notices. Upstream licenses remain valid.
+"""
+        (out/"RELEASE_NOTES.md").write_text(notes)
+    if args.download_request_fix:
+        notes=f"""# FollowCore-CAN {version}
+
+Candidate for controlled online OTA evaluation, not production qualification.
+Controller {version}, source `{components['s3']['commit']}`.
+Compatible F303 {driver_version} remains unchanged at its original release.
+
+{"VERSION-only exercise of the exact rc.18 functional base recorded in validation." if args.version_only else "Fix the rc.16/17 controller online-download request path."}
+
+GitHub Release signed redirect requests can exceed the old 512-byte TX buffer.
+The downloader uses 2,048-byte TX, checks the URL/request budget before opening
+the client and clears stale errno before async polling. Each trusted hop has a
+bounded first-byte budget within the existing total deadline. Failures distinguish
+connection, request send, response wait and receive. Diagnostic logs retain only
+host/hop/stage, never signed query strings. Actual installed SDK request-builder
+replays reproduce the old failure and test captured and maximum accepted lengths.
+
+The original rc.16 second-attempt device log contained 1,257 Out of buffer errors
+before a generic timeout. Do not automatically attribute this failure to network
+reachability. Real regional TCP/TLS access still depends on the device's network;
+a VPN-enabled PC download does not certify the ESP32 connection.
+
+Only the controller is updated. Motor/CAN/PDO/homing/current limits are unchanged.
+Keep HTTPS CA/hostname checks, fixed RSA-3072/PSS trust, exact size/hash/version
+validation, inactive-slot writes, separate install confirmation and boot rollback.
+Older controllers require this corrected bootstrap through local upload/qualified
+USB once before the corrected online downloader can run. rc.16/17 themselves
+cannot be relied on to download this correction through long Release redirects.
+The matching browser bundle is byte-identical to rc.16.
+
+See release-manifest.json for exact host/build and hardware qualification scope.
+No mechanical, power-interruption or long-term reliability qualification is claimed.
+Do not erase NVS, overwrite an immutable release, or bypass signature checks.
 
 Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
 Download the accompanying third-party notices. Upstream licenses remain valid.

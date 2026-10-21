@@ -1,5 +1,14 @@
 # Changelog
 
+## v3.0.0-rc.18 — FollowCore-CAN online download request correction
+
+- Correct the 512-byte TX buffer that rejects long GitHub signed redirect requests.
+- Check URL/request capacity before opening a client; use 2048-byte TX and clear stale errno.
+- Distinguish secure connection, request send, response wait and receive failures; retain bounded per-hop/total/idle deadlines.
+- Replay the actual installed SDK builder with captured/max-size URLs; old configuration must fail.
+- Controller only; unchanged driver rc.3, motor/CAN/PDO/homing/current control and fixed signing trust.
+- See corrected rc.16 incident evidence in the qualification report; real rc.18/19 online acceptance is separate.
+
 ## v3.0.0-rc.17 — FollowCore-CAN online OTA exercise
 
 - VERSION-only target based on the rc.16 implementation; motor/CAN/driver unchanged.

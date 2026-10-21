@@ -48,12 +48,21 @@ download attempts ended in about 20 seconds with `ESP_ERR_TIMEOUT (0x107)`, HTTP
 TLS/mbedTLS/flags/errno 0 and received/written bytes 0. No install confirmation or
 boot selection was requested. The running controller is still rc.16.
 
-These codes do not distinguish TCP connection from TLS handshake, and cannot
-independently prove censorship, a server problem or a firmware defect. A
-VPN-enabled computer's successful release download is not an equivalent direct
-ESP32 network test. Re-test on a network that can directly reach the GitHub release
-download hosts. Do not weaken HTTPS/signature validation or replace this with a
-computer-assisted upload and call it online OTA acceptance.
+The terminal codes alone did not distinguish the failure. Subsequent full-log
+review found **1,257 `HTTP_CLIENT: Out of buffer` errors** in the second native
+attempt (uptime 693775..708158 ms), followed by the generic timeout at 708170 ms.
+The download TX buffer was only 512 bytes, while a captured GitHub redirect had
+a 957-byte URL / 928-byte request line. The unchanged installed IDF request builder
+reproduces this permanent local request-construction failure. Stale `errno=EAGAIN`
+can make IDF retry it until the application deadline. The earlier uncertainty is
+superseded for this second attempt: it has concrete firmware-defect evidence.
+The first attempt's limited logs still do not independently establish its cause.
+
+rc.18 corrects TX/request sizing and error stages; rc.19 is its VERSION-only online
+exercise target. The original rc.16/17 artifacts remain immutable and are not a
+reliable bootstrap for long signed Release URLs. A VPN-enabled PC's successful
+download still does not prove ESP32 network access. Do not weaken HTTPS/signature
+verification or call a computer-assisted upload direct online OTA acceptance.
 
 The first catalog response was the old rc.15 listing; the device correctly showed
 Local newer and disabled installation. Public branch-URL headers showed a 300s
