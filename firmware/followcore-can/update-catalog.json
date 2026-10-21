@@ -6,7 +6,7 @@
   "controller_hardware": "ESP-V3.003",
   "stable": null,
   "testing": {
-    "s3": {"version": "v3.0.0-rc.17", "notes": "Online OTA exercise from rc.16. Download, validate, then confirm install. Driver unchanged.", "image_bytes": 2375680, "sha256": "f1d905260a19dd4c1cadc79a93b4625ba377fdcf1a124997a84f966233d2119c"},
+    "s3": {"version": "v3.0.0-rc.19", "notes": "Fix long GitHub download requests. Online OTA exercise from rc.18. Driver unchanged.", "image_bytes": 2375680, "sha256": "937671ba3d3f2b78e1fddbce2ab8ac69991546716c8d65d27140ce7aece848e7"},
     "f303": {"version": "v3.0.0-rc.3", "notes": "Version identity only; no motor-control or PDO changes."}
   }
 }
