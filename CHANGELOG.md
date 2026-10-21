@@ -1,5 +1,20 @@
 # Changelog
 
+## v3.0.0-rc.21 — Connection-capture OTA exercise target
+
+- Exact VERSION-only target of rc.20; no additional network/control changes.
+- Published separately so rc.20 can exercise its native query/download workflow.
+- Download validation and installation remain separate explicit actions.
+
+## v3.0.0-rc.20 — Passive query/download connection evidence
+
+- Retain separate bounded evidence for the latest query and firmware download.
+- Observe actual connect address, TCP/TLS progress, request write and header parsing.
+- One-shot NETTRACE export; no passwords, signed links, cookies or payload capture.
+- No new network workaround, diagnostic probe, retry or ordinary status output.
+- Preserve rc.18's request correction, TLS/signature checks and all motion gates.
+- Driver rc.3, motor/CAN/PDO, homing, current limits and partition layout unchanged.
+
 ## v3.0.0-rc.19 — Corrected online OTA exercise target
 
 - VERSION-only target on the corrected rc.18 base; exact source difference verified.

@@ -22,7 +22,7 @@ Use [GitHub Releases](https://github.com/sapphiresaiv/followcore-firmware/releas
 Download the component-specific BIN and matching documentation/checksums.
 Controller and motor-driver BIN files are **not interchangeable**.
 
-`v3.0.0-rc.19` (S3, compatible unchanged F303 `v3.0.0-rc.3`) is a
+`v3.0.0-rc.21` (S3, compatible unchanged F303 `v3.0.0-rc.3`) is a
 **release candidate for controlled evaluation**, not a stable
 or production-qualified release. Read the release's compatibility table and
 known limitations before installation. Older test counts do not certify a new
@@ -67,6 +67,10 @@ on online download. Fixed signing trust and motor/driver control are unchanged.
 `rc.19` is a VERSION-only target on the corrected rc.18 base for direct online
 download/validation/install testing. Original rc.16/17 Release assets remain
 immutable; their downloader has the documented request-size defect.
+`rc.20` adds retained passive evidence to the actual query/download connections;
+it does not change network policy or prove regional reachability. Explicit
+NETTRACE export distinguishes TCP, TLS, request and response progress without
+capturing signed URLs or credentials. `rc.21` is its exact VERSION-only OTA target.
 [Read the update workflow and its limits](docs/firmware-update.md).
 [Current rc.18 hardware acceptance and network limitations](docs/qualification/online-ota-rc18-2026-10-21.md).
 S3 OTA does not update the F303 driver. Universal servo compatibility and

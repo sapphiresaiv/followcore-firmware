@@ -43,6 +43,7 @@ def main():
     p.add_argument("--version-only", action="store_true", help="S3 OTA exercise: only VERSION differs from the reviewed base commit")
     p.add_argument("--online-ota-ui", action="store_true", help="Signed controller online OTA and independent version cards; driver unchanged")
     p.add_argument("--download-request-fix", action="store_true", help="Online OTA long signed-URL request fix and stage-specific failures")
+    p.add_argument("--connection-capture", action="store_true", help="Retain passive query/download connection evidence on explicit NETTRACE GET")
     p.add_argument("--s3-web", type=Path, required=True)
     p.add_argument("--validation", type=Path, required=True, help="Reviewed public validation JSON; never infer PASS from a build")
     args = p.parse_args()
@@ -68,6 +69,8 @@ def main():
         raise ValueError("Online OTA requires separate S3-only notes and version checking")
     if args.download_request_fix and not args.online_ota_ui:
         raise ValueError("Download request correction requires online OTA release notes")
+    if args.connection_capture and not args.online_ota_ui:
+        raise ValueError("Connection capture requires online OTA release notes")
     if args.version_only and (not args.s3_only or any((args.commissioning_ui,
             args.button_feedback,args.update_errors,args.async_tls_fix,args.network_profile_ui,
             args.dns_presets,args.dns_empty_fix))):
@@ -523,6 +526,41 @@ The matching browser bundle is byte-identical to rc.16.
 See release-manifest.json for exact host/build and hardware qualification scope.
 No mechanical, power-interruption or long-term reliability qualification is claimed.
 Do not erase NVS, overwrite an immutable release, or bypass signature checks.
+
+Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
+Download the accompanying third-party notices. Upstream licenses remain valid.
+"""
+        (out/"RELEASE_NOTES.md").write_text(notes)
+    if args.connection_capture:
+        notes=f"""# FollowCore-CAN {version}
+
+Candidate for controlled connection diagnosis, not production qualification.
+Controller {version}, source `{components['s3']['commit']}`.
+Compatible F303 {driver_version} is unchanged at its original release.
+
+{"VERSION-only OTA target of the exact functional base recorded in validation." if args.version_only else "Add retained passive evidence to the existing query and download connections."}
+The explicit NETTRACE GET diagnostic exports separate bounded records for the
+latest catalog query and firmware download. Observe the actual connect target,
+TCP readiness, TLS result, request-line/Host comparison, positive transport write
+count and response header progress. Keep only a short HTTP status-line prefix;
+do not retain passwords, signed redirect queries, cookies or firmware payload.
+
+The observer follows the actual job, without additional requests or probes.
+Ordinary status mirrors remain unchanged; no continuous diagnostic printing.
+This is not packet capture: local transport acceptance does not prove remote
+receipt, and a connection timeout alone does not identify censorship or a server
+refusal. Query and download use different endpoints and must be assessed apart.
+Evidence persists in RAM until the next same-channel job or controller reset.
+
+Retain rc.18's long-request correction and all existing DNS, deadlines, retry,
+HTTPS CA/hostname, fixed RSA-3072/PSS, image size/hash/version and rollback gates.
+There is no new network workaround or claim of repaired regional reachability.
+No driver, motor/CAN/PDO, homing, current-limit or partition changes.
+The matching browser bundle is byte-identical to rc.16.
+
+See release-manifest.json for the exact host/build and hardware scope. Mechanical,
+power-loss and long-term reliability are not qualified by these diagnostics.
+Use the signed controller OTA image; do not erase NVS or bypass verification.
 
 Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
 Download the accompanying third-party notices. Upstream licenses remain valid.
