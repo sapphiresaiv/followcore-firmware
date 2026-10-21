@@ -61,6 +61,7 @@ scrollable catalog notes, download progress and explicit install confirmation.
 Older firmware needs this bootstrap once through local upload/qualified USB.
 `rc.17` only advances VERSION to exercise rc.16's online OTA implementation.
 [Read the update workflow and its limits](docs/firmware-update.md).
+[Hardware acceptance: bootstrap/UI passed; direct online download timed out](docs/qualification/online-ota-2026-10-21.md).
 S3 OTA does not update the F303 driver. Universal servo compatibility and
 CANopen/EtherCAT safety or conformance certification are not claimed.
 
