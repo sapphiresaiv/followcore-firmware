@@ -72,7 +72,8 @@ it does not change network policy or prove regional reachability. Explicit
 NETTRACE export distinguishes TCP, TLS, request and response progress without
 capturing signed URLs or credentials. `rc.21` is its exact VERSION-only OTA target.
 [Read the update workflow and its limits](docs/firmware-update.md).
-[Current rc.18 hardware acceptance and network limitations](docs/qualification/online-ota-rc18-2026-10-21.md).
+[Historical rc.18 hardware acceptance](docs/qualification/online-ota-rc18-2026-10-21.md).
+[Current rc.20 connection captures and limitations](docs/qualification/connection-capture-rc20-2026-10-21.md).
 S3 OTA does not update the F303 driver. Universal servo compatibility and
 CANopen/EtherCAT safety or conformance certification are not claimed.
 
