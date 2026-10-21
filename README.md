@@ -22,11 +22,18 @@ Use [GitHub Releases](https://github.com/sapphiresaiv/followcore-firmware/releas
 Download the component-specific BIN and matching documentation/checksums.
 Controller and motor-driver BIN files are **not interchangeable**.
 
-`v3.0.0-rc.21` (S3, compatible unchanged F303 `v3.0.0-rc.3`) is a
+`v3.0.0-rc.29` (S3, paired installed F303 `v3.0.0-rc.5`) is a
 **release candidate for controlled evaluation**, not a stable
 or production-qualified release. Read the release's compatibility table and
 known limitations before installation. Older test counts do not certify a new
 firmware version.
+
+rc.29 is an exact VERSION-only OTA test target of the locally installed rc.28
+controller. It is intended for that already paired rc.28/driver-rc.5 setup;
+the unchanged driver is not rebuilt or included in this release. This does not
+qualify an upgrade from every older public pairing. The source diff, build,
+signature and test scope are recorded in the release manifest. No device was
+flashed by this publication task; the operator performs the online update.
 
 ## Current project scope
 

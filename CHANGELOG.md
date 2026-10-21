@@ -1,5 +1,12 @@
 # Changelog
 
+## v3.0.0-rc.29 — Version-only target for the installed rc.28 controller
+
+- Exact frozen source difference from rc.28 is VERSION only; generated build identity changes.
+- No new motor, CAN/PDO, calibration, Wi-Fi, TLS, storage or protection changes.
+- Reuse the byte-identical rc.28 browser bundle; paired installed F303 rc.5 is unchanged and not included.
+- Intended for operator-run online OTA from rc.28, not a new mechanical or network qualification.
+
 ## v3.0.0-rc.21 — Connection-capture OTA exercise target
 
 - Exact VERSION-only target of rc.20; no additional network/control changes.
