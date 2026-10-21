@@ -89,6 +89,11 @@ both current versions are known and exactly match their selected public entries.
 The supported F303 version is read once per peer session through read-only
 standard 100A:00; missing metadata is not a new motor/homing qualification.
 
-This stage checks versions and displays notices. Direct GitHub download/install
-and automatic F303 updating are **not implemented**. Keep the signed local
-hotspot/qualified wired update workflows available.
+Firmware through rc.15 only checks versions and displays notices. From rc.16,
+controller online OTA is available after installing that bootstrap once through
+local upload/qualified USB. Controller and driver are separate cards; complete
+catalog summaries have a scrollable notes window. Only an available controller
+artifact with exact length/SHA metadata enables Update controller. Download and
+validate is distinct from Install and restart. The fixed signature trust,
+inactive slot, fresh owner permit and first-boot checks/rollback remain required.
+Automatic F303 installation is not implemented. Keep local/wired recovery.

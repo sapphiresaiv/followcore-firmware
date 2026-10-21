@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "product": "FollowCore",
+  "variant": "FollowCore-CAN",
+  "control_type": "CAN",
+  "version": "v3.0.0-rc.16",
+  "channel": "prerelease",
+  "release_tag": "followcore-can-v3.0.0-rc.16",
+  "repository": "sapphiresaiv/followcore-firmware",
+  "controller_hardware": "ESP-V3.003 / ESP32-S3-WROOM-1-N16R8",
+  "paired_driver": "supported STM32F303 project hardware with existing IAP",
+  "components": {
+    "s3": {
+      "version": "v3.0.0-rc.16",
+      "commit": "799deb82e53b4479e55f59edb6e52328e4d3b33e",
+      "image_bytes": 2375680,
+      "image_sha256": "d4b7aadd3913aa246a2db8d5e6b5c0f8fef5608aa89f280b57c6784b2f267c76",
+      "file": "followcore-can-s3-v3.0.0-rc.16-ota.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.16/followcore-can-s3-v3.0.0-rc.16-ota.bin",
+      "included_in_release": true,
+      "update_required": true
+    },
+    "f303": {
+      "version": "v3.0.0-rc.3",
+      "commit": "fb9b11db6b8e532aa1353cb746daf81ad48e7969",
+      "image_bytes": 100112,
+      "image_sha256": "498371dfb5d8c21e9b9bbc697d781bccb51e1ef22a03207f841f0d989e82f157",
+      "file": "followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.3/followcore-can-f303-v3.0.0-rc.3-app.bin",
+      "included_in_release": false,
+      "update_required": false
+    }
+  },
+  "github_device_ota_available": true,
+  "github_device_check_available": true,
+  "pulse_available": false,
+  "ethercat_available": false,
+  "validation": {
+    "version": "v3.0.0-rc.16",
+    "variant": "FollowCore-CAN",
+    "date": "2026-10-21",
+    "source_commit": "799deb82e53b4479e55f59edb6e52328e4d3b33e",
+    "s3_build": "PASS; 203.90s, immutable source verification before/after build",
+    "s3_signature_provenance": "PASS; application descriptor/source identity and fixed RSA-3072/PSS trust verified",
+    "s3_image_sha256": "d4b7aadd3913aa246a2db8d5e6b5c0f8fef5608aa89f280b57c6784b2f267c76",
+    "s3_image_bytes": 2375680,
+    "s3_static_ram_bytes": 103060,
+    "host_cpp_groups": 113,
+    "host_tests": "PASS_ASAN_UBSAN; full C++ suite plus protocol, Python/signing, actual pinned SDK connection-state replay and feedback adjuncts",
+    "online_ota_tests": "PASS; fixed HTTPS hosts/redirect bound, asynchronous pending/cancel/timeout, response size/truncation, writer refusal, real SHA256, exact target header before erase, SDK signature refusal, fresh-permit revocation, no automatic activation",
+    "maintenance_queue": "PASS; duplicate rejection, stale publication protection, cancellation before/after pickup, conflict rejection for queries/DNS/hotspot while installation is reserved",
+    "native_ui": "PASS; separate component cards, complete 96-byte catalog notes, explicit paging, download/install confirmations, progress/disabled feedback, page navigation retains lease, no motion/settings writes",
+    "web_ui": "PASS; authoritative native mirror and legacy-tail reset; normal WASM and S3-equivalent fixed 192KiB LVGL pool, including notes/download/install overlays",
+    "compiler_local_stack_frames": "PASS existing logger/INA limits; maintenance owner 7904B local frame with 16KiB task allocation, UI refresh 6336B with 12KiB task allocation. Local frames are not a complete task/TLS call-stack or runtime watermark measurement.",
+    "bootstrap_installation": "PASS; qualified wired inactive-slot update from rc.14, fixed signature and preserved partition/NVS/current image checks; observed SDK first-boot confirmation with motion still locked",
+    "online_download_install_hardware": "NOT_RUN at packaging; target rc.17 is being published for a separate end-to-end acceptance record",
+    "driver": "rc.3 unchanged; no driver serial access, rebuild, parameter write or flash",
+    "control_can_homing_limits": "UNCHANGED from rc.15; firmware change is maintenance/UI/OTA only",
+    "known_network_limitation": "Direct ESP32 GitHub access still depends on the actual network. DNS success is not TCP/TLS/HTTP success; a VPN-enabled PC is not an equivalent direct-network control.",
+    "power_loss_and_long_term_reliability": "NOT_QUALIFIED"
+  },
+  "assets": [
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.16-ota.bin",
+      "bytes": 2375680,
+      "sha256": "d4b7aadd3913aa246a2db8d5e6b5c0f8fef5608aa89f280b57c6784b2f267c76",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.16/followcore-can-s3-v3.0.0-rc.16-ota.bin"
+    },
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.16-web.zip",
+      "bytes": 648884,
+      "sha256": "76f8aa4c82f177d9d2fcaa47e97bebac9606b38e705a102416c1fca2232b22f1",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.16/followcore-can-s3-v3.0.0-rc.16-web.zip"
+    },
+    {
+      "file": "followcore-can-v3.0.0-rc.16-notices.zip",
+      "bytes": 46198,
+      "sha256": "97223fbaf44799a62d75623e5ef4e0fbfffd597abdacb6933e313a1d8ddc9c5b",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.16/followcore-can-v3.0.0-rc.16-notices.zip"
+    }
+  ]
+}

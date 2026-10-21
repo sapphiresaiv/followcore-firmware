@@ -43,6 +43,14 @@ def main():
             manifest = json.loads((ROOT / "firmware/followcore-can/releases" / version / "release-manifest.json").read_text())
             if manifest["components"][component]["version"] != version:
                 raise ValueError("Component release does not match catalog")
+            if "image_bytes" in entry or "sha256" in entry:
+                size, digest = entry.get("image_bytes"), entry.get("sha256")
+                if type(size) is not int or not 8192 <= size <= 4194304 or size % 4096 or \
+                        not isinstance(digest,str) or not re.fullmatch(r"[0-9a-f]{64}",digest):
+                    raise ValueError("Invalid signed artifact metadata")
+                actual=manifest["components"][component]
+                if size!=actual["image_bytes"] or digest!=actual["image_sha256"]:
+                    raise ValueError("Catalog artifact differs from immutable release")
     print("Catalog identity, bounds, channels and local release references validated")
 
 

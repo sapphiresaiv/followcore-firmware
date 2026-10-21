@@ -48,7 +48,23 @@ Navigation does not cancel the maintenance lock: use Cancel upgrade or End
 maintenance. Explicitly end first-boot maintenance before restoring control and
 homing. Physical isolation alone does not authorize wireless operation.
 
-Direct GitHub download/install is not implemented. F303 is only compared and
-reported, not automatically updated by S3. Keep the signed local upload method
-and qualified wired recovery available. Internet failures must not be reported
-as "already latest" or as CAN/motor faults.
+## Controller online OTA (rc.16 and newer)
+
+Older firmware only checks versions. Install the signed rc.16-or-newer bootstrap
+once through local upload or the qualified USB workflow to gain online OTA.
+Connect Wi-Fi, open Version, select Include testing for prereleases, then Check
+updates. Controller and driver have separate current/available versions and
+status badges. Release notes opens the complete bounded catalog summaries with
+scrolling and page buttons, not the full GitHub Markdown page.
+
+An available controller image with installation metadata enables Update
+controller. Confirm Download and validate; progress is shown while the inactive
+slot is written. Exact size, SHA256, project/chip/version and the fixed signing
+key must pass before Install and restart becomes available. Confirm restart
+separately; maintain stable power. First-boot verification/rollback still apply.
+Navigation does not release the maintenance lock. End maintenance cancels.
+
+F303 is compared and reported, not automatically installed. Keep the signed
+local upload method and qualified wired recovery available. Internet failures
+are not "already latest" or CAN/motor faults. DNS success alone does not prove
+direct GitHub access; a computer's VPN does not extend to the controller.

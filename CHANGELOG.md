@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.0.0-rc.17 — FollowCore-CAN online OTA exercise
+
+- VERSION-only target based on the rc.16 implementation; motor/CAN/driver unchanged.
+- Requires the rc.16 bootstrap before the controller can download it online.
+- Candidate, not a production or long-term reliability qualification; see release validation.
+
+## v3.0.0-rc.16 — FollowCore-CAN controller online OTA
+
+- Independent controller/driver version cards, highlighted updates and scrollable catalog notes.
+- Explicit signed HTTPS download into the inactive slot; exact size/SHA/project/chip/version checks.
+- Separate install/restart confirmation; preserve maintenance gates, fixed trust and rollback.
+- Driver rc.3 remains unchanged; no automatic driver installation or motor-control changes.
+
 ## v3.0.0-rc.15 — FollowCore-CAN S3 OTA exercise
 
 - Version-only candidate based on rc.14; the firmware source diff is VERSION only.

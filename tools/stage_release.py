@@ -41,6 +41,7 @@ def main():
     p.add_argument("--dns-presets", action="store_true", help="This S3-only revision adds named DNS presets and asynchronous lookup diagnostics")
     p.add_argument("--dns-empty-fix", action="store_true", help="This revision corrects rc.13 empty DNS set/restore and close failure")
     p.add_argument("--version-only", action="store_true", help="S3 OTA exercise: only VERSION differs from the reviewed base commit")
+    p.add_argument("--online-ota-ui", action="store_true", help="Signed controller online OTA and independent version cards; driver unchanged")
     p.add_argument("--s3-web", type=Path, required=True)
     p.add_argument("--validation", type=Path, required=True, help="Reviewed public validation JSON; never infer PASS from a build")
     args = p.parse_args()
@@ -61,6 +62,9 @@ def main():
         raise ValueError("DNS presets require separate S3-only release notes")
     if args.dns_empty_fix and not args.dns_presets:
         raise ValueError("DNS empty-entry correction requires the DNS preset notes")
+    if args.online_ota_ui and (not args.s3_only or not args.github_check or any((args.commissioning_ui,
+            args.button_feedback,args.update_errors,args.async_tls_fix,args.network_profile_ui,args.dns_presets))):
+        raise ValueError("Online OTA requires separate S3-only notes and version checking")
     if args.version_only and (not args.s3_only or any((args.commissioning_ui,
             args.button_feedback,args.update_errors,args.async_tls_fix,args.network_profile_ui,
             args.dns_presets,args.dns_empty_fix))):
@@ -136,7 +140,7 @@ def main():
         "controller_hardware": "ESP-V3.003 / ESP32-S3-WROOM-1-N16R8",
         "paired_driver": "supported STM32F303 project hardware with existing IAP",
         "components": components,
-        "github_device_ota_available": False,
+        "github_device_ota_available": args.online_ota_ui,
         "github_device_check_available": args.github_check,
         "pulse_available": False, "ethercat_available": False,
         "validation": validation,
@@ -445,6 +449,39 @@ release task; the operator will perform the OTA exercise. Verify the displayed
 {version} after reboot. See release-manifest.json for build/signature evidence.
 The browser bundle is unchanged from rc.14 and does not require replacing an
 already matching rc.14 bundle. Do not erase NVS or guess Flash addresses.
+
+Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
+Download the accompanying third-party notices. Upstream licenses remain valid.
+"""
+        (out/"RELEASE_NOTES.md").write_text(notes)
+    if args.online_ota_ui:
+        notes=f"""# FollowCore-CAN {version}
+
+Pre-release for controlled online OTA evaluation, not production qualification.
+Controller {version}, source `{components['s3']['commit']}`.
+Compatible driver {driver_version}, source `{components['f303']['commit']}`;
+unchanged, not rebuilt, republished, downloaded or automatically flashed.
+
+Controller/driver versions now have independent cards and status badges. The
+complete bounded catalog summaries open in a scrollable release-notes window.
+An available controller image offers Download and validate, visible progress,
+then a separate Install and restart confirmation. This is controller-only OTA;
+motor/CAN/PDO/homing/current limits and the fixed signing trust are unchanged.
+
+Older controllers need the signed rc.16-or-newer bootstrap through the existing
+local-hotspot/qualified USB workflow before they gain online installation.
+The device streams a fixed-repository HTTPS release asset to the inactive slot,
+checking target version/project/chip, exact size, SHA256 and the fixed public
+RSA-3072/PSS signature. No automatic slot selection; first-boot verification and
+rollback remain enabled. Do not erase NVS or bypass HTTPS/signature checks.
+Page navigation keeps the maintenance lock; End maintenance explicitly cancels.
+
+{"This target differs from the reviewed rc.16 base only in VERSION and generated identity; it exercises rc.16 online OTA." if args.version_only else "This is the functional bootstrap that introduces online controller OTA."}
+
+See release-manifest.json for the precise validation scope and hardware result.
+Network availability in a VPN-enabled computer does not prove direct access by
+the ESP32. DNS success does not prove TCP/TLS/HTTP success; an interrupted or
+failed download must not be reported as installed or already latest.
 
 Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
 Download the accompanying third-party notices. Upstream licenses remain valid.
