@@ -1,5 +1,14 @@
 # Changelog
 
+## v3.0.0-rc.103 — Compact progress and passive TLS diagnosis
+
+- VERSION-only online target of the locally installed rc.102 diagnostic build.
+- Since public rc.100: percentage, received amount and firmware size in decimal KB/MB; retain failed-attempt counts.
+- Distinguish connection/handshake/request/receiving/validation without claiming zero bytes means Flash failure.
+- Add one-shot passive mbedTLS state/results and encrypted BIO I/O counts; no packet contents, credentials or continuous UART trace.
+- No new route/retry/timeout workaround or TLS/signature bypass; no motor, CAN/PDO, homing, current-limit, partition or driver changes.
+- See actual validation and pending online acceptance in the release manifest.
+
 ## v3.0.0-rc.100 — Controller online OTA test target
 
 - Advance from the locally installed rc.32 to rc.100; simplify the network success label to "网络已连接".
