@@ -22,25 +22,28 @@ Use [GitHub Releases](https://github.com/sapphiresaiv/followcore-firmware/releas
 Download the component-specific BIN and matching documentation/checksums.
 Controller and motor-driver BIN files are **not interchangeable**.
 
-`v3.0.0-rc.100` (controller, paired installed F303 `v3.0.0-rc.5`) is a
+`v3.0.0-rc.104` (controller, paired installed F303 `v3.0.0-rc.5`) is a
 **release candidate for controlled evaluation**, not a stable
 or production-qualified release. Read the release's compatibility table and
 known limitations before installation. Older test counts do not certify a new
 firmware version.
 
-rc.100 is an online OTA test target for the locally installed rc.32 controller,
-with the requested simplified network-status wording and regression tests.
-It is intended for that already paired rc.32/driver-rc.5 setup;
+rc.104 is a VERSION-only online OTA target for the locally installed rc.34
+controller and contains the same reviewed fixes. It is intended for that
+already paired rc.34/driver-rc.5 setup;
 the unchanged driver is not rebuilt or included in this release. This does not
 qualify an upgrade from every older public pairing. The source diff, build,
 signature and test scope are recorded in the release manifest. No device was
-flashed by this publication task; the operator performs the online update.
+flashed with rc.104 by this publication task; the operator performs the online update.
 
-The rc.32 base adds the combined Upgrade interface, bounded connectivity
-indicator, corrected asynchronous HTTP-body polling, reduced UI stack frames,
-and extra LVGL/UI memory headroom. Refresh the matching browser bundle for the
-updated wording. No motor/CAN/homing or network-validation policy changes are
-made from rc.32. v3.1.0 candidates will follow only after the OTA test is accepted.
+The rc.34 base keeps the connectivity lamp green on fresh accepted HTTPS data,
+uses amber for waiting/checking, and preserves real startup EMCY history before
+local maintenance pauses CAN observation. The home action leads to explicit
+maintenance exit instead of a recovery request that must be refused. It also
+retains compact KB/MB download progress, passive TLS diagnostics and rc.32's
+memory/stack and asynchronous HTTP-body fixes. Refresh the matching browser
+bundle. No driver, motor parameter, homing threshold, partition or signing-trust
+change is made. v3.1.0 candidates follow only after OTA acceptance.
 
 ## Current project scope
 

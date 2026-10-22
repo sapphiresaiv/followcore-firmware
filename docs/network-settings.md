@@ -49,3 +49,19 @@ documented operation on its TCP/IP thread and verifies the result. Nonempty
 addresses still use ESP-NETIF. Connecting to the saved network does not require
 a preliminary scan. rc.13 is withdrawn from the testing catalog; its original
 release assets remain immutable for diagnosis.
+
+The rc.34 functional base (also included in the rc.104 OTA target) separates the
+Wi-Fi-page connectivity lamp from association and from OTA validation. Recent
+successful connectivity probes or accepted HTTPS response data keep it green.
+Background rechecks preserve recent success; waiting/checking without fresh
+evidence is amber. Disconnect clears the evidence immediately. A failed probe
+without recent success is red, labelled as a failed check rather than proof that
+every Internet endpoint is inaccessible. A long job without new receive data
+does not keep a stale green forever. No standalone probe competes with OTA.
+
+No GitHub/Microsoft-specific public DNS accelerator is configured. GitHub states
+that its [IP addresses change](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-githubs-ip-addresses);
+hard-coding them is not a supported reliability fix. Microsoft's Azure resolver
+168.63.129.16 is [VNet-scoped](https://learn.microsoft.com/en-us/azure/dns/dns-troubleshoot),
+not a public device resolver. Existing DNS presets may help name resolution;
+they do not guarantee that a later TCP/TLS connection will succeed.

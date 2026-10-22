@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "product": "FollowCore",
+  "variant": "FollowCore-CAN",
+  "control_type": "CAN",
+  "channel": "prerelease",
+  "repository": "sapphiresaiv/followcore-firmware",
+  "controller_hardware": "ESP-V3.003 / ESP32-S3-WROOM-1-N16R8",
+  "paired_driver": "supported STM32F303 project hardware with existing IAP",
+  "github_device_ota_available": true,
+  "github_device_check_available": true,
+  "pulse_available": false,
+  "ethercat_available": false,
+  "version": "v3.0.0-rc.104",
+  "release_tag": "followcore-can-v3.0.0-rc.104",
+  "components": {
+    "s3": {
+      "version": "v3.0.0-rc.104",
+      "commit": "69a7ace0bc7d76c248ae9a33bc2e6fe5a97a3925",
+      "image_bytes": 2408448,
+      "image_sha256": "b8b6b485df208cb0cdc756c404fb16bfb98a8b56549725a91c763e2c02575f36",
+      "file": "followcore-can-s3-v3.0.0-rc.104-ota.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.104/followcore-can-s3-v3.0.0-rc.104-ota.bin",
+      "included_in_release": true,
+      "update_required": true
+    },
+    "f303": {
+      "version": "v3.0.0-rc.5",
+      "commit": "3b0090e6b9cc1bbf2483fd20931b4cdd5a89a75d",
+      "image_bytes": 100536,
+      "image_sha256": "823bca65e2dfd2db38005a4f691d8913e786a9cd7b13c7c66c2b9622e95b544f",
+      "file": "followcore-can-f303-v3.0.0-rc.5-app.bin",
+      "url": null,
+      "reference_only": true,
+      "distribution_note": "Existing installed compatible driver identity only; no driver download is published by this release.",
+      "included_in_release": false,
+      "update_required": false
+    }
+  },
+  "validation": {
+    "version": "v3.0.0-rc.104",
+    "variant": "FollowCore-CAN",
+    "date": "2026-10-22",
+    "source_commit": "69a7ace0bc7d76c248ae9a33bc2e6fe5a97a3925",
+    "version_only_base_commit": "4ec77f98de7874dcf60bc72da07fcc95772f3138",
+    "source_changed_paths": [
+      "VERSION"
+    ],
+    "source_review": "PASS; VERSION-only from the final installed rc.34 source",
+    "s3_build": "PASS; frozen build, embedded identity and fixed-key signature verified",
+    "base_tests": "rc.34 functional candidate:116 ASan/UBSan C++ groups plus adjuncts; final review:2 affected groups plus adjuncts",
+    "ui_tests": "PASS; same rc.34 native update/header and dynamic WASM UI; rebuilt matched web bundle",
+    "functional_base_hardware": "rc.34 qualified wired startup passed; SDK confirmed3459ms,147 S frames, zero invalid CRC, UI free stack11804B",
+    "online_hardware": "NOT_RUN for rc.34-to-rc.104; operator acceptance pending, no rc.104 serial flash",
+    "driver": "Installed rc.5 unchanged; no driver file or new download URL included",
+    "changes_from_rc100": "Reachability evidence, status colors, compact KB/MB progress, passive TLS diagnostics, EMCY history/maintenance handback UI",
+    "safety": "No motor target, homing threshold, current limit, partition, fixed trust, CA/hostname validation or automatic-recovery change",
+    "power_loss_mechanical_and_long_term_reliability": "NOT_QUALIFIED"
+  },
+  "assets": [
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.104-ota.bin",
+      "bytes": 2408448,
+      "sha256": "b8b6b485df208cb0cdc756c404fb16bfb98a8b56549725a91c763e2c02575f36",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.104/followcore-can-s3-v3.0.0-rc.104-ota.bin"
+    },
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.104-web.zip",
+      "bytes": 654374,
+      "sha256": "e64c17d808d2265f9a694984e7f275edd5b82497ffae8c2600280826d451d239",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.104/followcore-can-s3-v3.0.0-rc.104-web.zip"
+    },
+    {
+      "file": "followcore-can-v3.0.0-rc.104-notices.zip",
+      "bytes": 46198,
+      "sha256": "97223fbaf44799a62d75623e5ef4e0fbfffd597abdacb6933e313a1d8ddc9c5b",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.104/followcore-can-v3.0.0-rc.104-notices.zip"
+    }
+  ]
+}

@@ -1,5 +1,18 @@
 # Changelog
 
+## v3.0.0-rc.104 — Synchronized OTA target for local rc.34
+
+- VERSION-only target of the final rc.34 controller source; retain rc.100 unchanged.
+- Keep green on fresh accepted HTTPS data; background checks retain recent evidence,
+  waiting/checking is amber, and true disconnect clears stale session evidence.
+- Record pending observed startup communication EMCY before local maintenance
+  suspends confirmation; do not automatically clear faults or enable the drive.
+- Correct the home maintenance/recovery action and visibly disable jog in maintenance.
+- Retain compact KB/MB progress, passive TLS diagnostics and all OTA trust gates.
+- Installed F303 rc.5 is unchanged and not included. No homing/current/partition changes.
+- rc.34 host/UI/wired startup evidence is recorded; rc.34-to-rc.104 online installation
+  is pending operator acceptance, not claimed passed by PC asset verification.
+
 ## v3.0.0-rc.100 — Controller online OTA test target
 
 - Advance from the locally installed rc.32 to rc.100; simplify the network success label to "网络已连接".
