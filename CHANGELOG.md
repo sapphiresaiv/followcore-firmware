@@ -1,5 +1,14 @@
 # Changelog
 
+## v3.0.0-rc.100 — Controller online OTA test target
+
+- Advance from the locally installed rc.32 to rc.100; simplify the network success label to "网络已连接".
+- Add numeric rc.100/rc.32 and future v3.1.0 ordering plus native wording regressions.
+- Retain rc.32's unified Upgrade page, bounded connectivity indicator, SDK body-poll correction and UI memory/stack fixes.
+- No motion, CAN/PDO, homing, current-limit, network-check policy, partition or signing-trust changes from rc.32.
+- Paired installed F303 rc.5 remains unchanged and is not included; no new driver download is advertised.
+- Not serial-flashed by this publication task; complete online OTA is for operator acceptance, not claimed passed.
+
 ## v3.0.0-rc.29 — Version-only target for the installed rc.28 controller
 
 - Exact frozen source difference from rc.28 is VERSION only; generated build identity changes.

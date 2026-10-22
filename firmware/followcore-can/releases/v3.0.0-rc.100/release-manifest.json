@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "product": "FollowCore",
+  "variant": "FollowCore-CAN",
+  "control_type": "CAN",
+  "channel": "prerelease",
+  "repository": "sapphiresaiv/followcore-firmware",
+  "controller_hardware": "ESP-V3.003 / ESP32-S3-WROOM-1-N16R8",
+  "paired_driver": "supported STM32F303 project hardware with existing IAP",
+  "github_device_ota_available": true,
+  "github_device_check_available": true,
+  "pulse_available": false,
+  "ethercat_available": false,
+  "version": "v3.0.0-rc.100",
+  "release_tag": "followcore-can-v3.0.0-rc.100",
+  "components": {
+    "s3": {
+      "version": "v3.0.0-rc.100",
+      "commit": "3dfc48952ef323e3f4db2cc89f5d9d06dd5d8e9f",
+      "image_bytes": 2404352,
+      "image_sha256": "9415f9a9c87ef63eab99d2f730673b9aee525882407a2132c3f6c05085c3a591",
+      "file": "followcore-can-s3-v3.0.0-rc.100-ota.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.100/followcore-can-s3-v3.0.0-rc.100-ota.bin",
+      "included_in_release": true,
+      "update_required": true
+    },
+    "f303": {
+      "version": "v3.0.0-rc.5",
+      "commit": "3b0090e6b9cc1bbf2483fd20931b4cdd5a89a75d",
+      "image_bytes": 100536,
+      "image_sha256": "823bca65e2dfd2db38005a4f691d8913e786a9cd7b13c7c66c2b9622e95b544f",
+      "file": "followcore-can-f303-v3.0.0-rc.5-app.bin",
+      "url": null,
+      "reference_only": true,
+      "distribution_note": "Existing installed compatible driver identity only; no driver download is published by this release.",
+      "included_in_release": false,
+      "update_required": false
+    }
+  },
+  "validation": {
+    "version": "v3.0.0-rc.100",
+    "variant": "FollowCore-CAN",
+    "date": "2026-10-22",
+    "source_commit": "3dfc48952ef323e3f4db2cc89f5d9d06dd5d8e9f",
+    "reviewed_base_commit": "62b349b6b9cdf69e9986549d8e41d5560491d945",
+    "source_changed_paths": [
+      "VERSION",
+      "main/ui_pages/maintenance_page.cpp",
+      "tests/firmware_update_policy_test.cpp",
+      "tools/ui_preview/update_ui_test.h"
+    ],
+    "source_review": "PASS; VERSION, network status text and two regression-test files only from installed rc.32; not a strictly VERSION-only release",
+    "s3_build": "PASS; clean frozen build; application descriptor, embedded source and metadata independently checked",
+    "s3_signature_provenance": "PASS; fixed RSA-3072/PSS, exact signed image size/SHA256 and frozen source verified",
+    "targeted_tests": "PASS; 3 C++ ASan/UBSan groups (version policy, online OTA, connectivity) and JS/Python/actual-SDK/signing adjuncts",
+    "ui_tests": "PASS; native full update-controls suite including requested wording/LED colors, dynamic WASM smoke, font/module checks",
+    "stack_frames": "PASS; UI refresh560B, phase callbacks48B; local-frame gate is not a complete runtime stack bound",
+    "memory": "Unchanged from installed rc.32: LVGL256KiB PSRAM, UI stack16KiB internal; actual compile commands verified",
+    "functional_base_hardware": "rc.32 native connection/catalog-query/network-close replay passed; minimum observed free UI stack10708B; not a new rc.100 hardware test",
+    "online_hardware": "NOT_RUN; no serial access, reset or flash; operator will test rc.32 to rc.100 online OTA",
+    "driver": "Installed F303 rc.5 unchanged; no driver binary or new download URL published",
+    "motion_can_homing_limits": "UNCHANGED from rc.32",
+    "network_storage_partition_and_trust": "UNCHANGED from rc.32; text only; no TLS/signature bypass",
+    "power_loss_mechanical_and_long_term_reliability": "NOT_QUALIFIED"
+  },
+  "assets": [
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.100-ota.bin",
+      "bytes": 2404352,
+      "sha256": "9415f9a9c87ef63eab99d2f730673b9aee525882407a2132c3f6c05085c3a591",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.100/followcore-can-s3-v3.0.0-rc.100-ota.bin"
+    },
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.100-web.zip",
+      "bytes": 654178,
+      "sha256": "f36afcee5b0ecf4ce457b5032462d15c69e462af2af60dab8a523c19d2a3b936",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.100/followcore-can-s3-v3.0.0-rc.100-web.zip"
+    },
+    {
+      "file": "followcore-can-v3.0.0-rc.100-notices.zip",
+      "bytes": 46198,
+      "sha256": "97223fbaf44799a62d75623e5ef4e0fbfffd597abdacb6933e313a1d8ddc9c5b",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.100/followcore-can-v3.0.0-rc.100-notices.zip"
+    }
+  ]
+}

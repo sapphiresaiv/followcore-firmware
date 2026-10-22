@@ -18,7 +18,8 @@ engineering logs must never be pushed here.
 
 `release-manifest.json` is a public distribution record. The controller does not
 consume it as an automatic install instruction. The separate bounded
-`update-catalog.json` is used for explicit version checks only. Advance it only
+`update-catalog.json` is used for explicit version checks and, on supported
+controllers, exact signed-artifact download validation. Advance it only
 after its referenced release assets are published and verified; never advertise
 an unpublished image or silently promote a prerelease to stable. Public Git commit IDs
 describe documentation; MCU source identifiers refer to separate private
