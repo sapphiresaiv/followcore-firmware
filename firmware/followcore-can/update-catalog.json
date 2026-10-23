@@ -6,7 +6,7 @@
   "controller_hardware": "ESP-V3.003",
   "stable": null,
   "testing": {
-    "s3": {"version": "v3.0.0-rc.104", "notes": "rc.34 fixes: network status, fault history, maintenance handback. Driver unchanged.", "image_bytes": 2408448, "sha256": "b8b6b485df208cb0cdc756c404fb16bfb98a8b56549725a91c763e2c02575f36"},
+    "s3": {"version": "v3.0.0-rc.47", "notes": "Calibration: explicit use/return, independent trust. Controller only; paired driver rc.9.", "image_bytes": 2453504, "sha256": "b1b668224fe897210c644ff41eb6499a1ee6b6e5dac506b7153d250f3ffce45c"},
     "f303": {"version": "v3.0.0-rc.3", "notes": "Version identity only; no motor-control or PDO changes."}
   }
 }
