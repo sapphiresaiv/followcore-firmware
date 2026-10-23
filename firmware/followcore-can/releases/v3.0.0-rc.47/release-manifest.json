@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "product": "FollowCore",
+  "variant": "FollowCore-CAN",
+  "control_type": "CAN",
+  "version": "v3.0.0-rc.47",
+  "channel": "prerelease",
+  "release_tag": "followcore-can-v3.0.0-rc.47",
+  "repository": "sapphiresaiv/followcore-firmware",
+  "controller_hardware": "ESP-V3.003 / ESP32-S3-WROOM-1-N16R8",
+  "paired_driver": "supported STM32F303 project hardware with existing IAP",
+  "components": {
+    "s3": {
+      "version": "v3.0.0-rc.47",
+      "commit": "8505a64d601fd577fe616abef2e09e2a3c07b7de",
+      "image_bytes": 2453504,
+      "image_sha256": "b1b668224fe897210c644ff41eb6499a1ee6b6e5dac506b7153d250f3ffce45c",
+      "file": "followcore-can-s3-v3.0.0-rc.47-ota.bin",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.47/followcore-can-s3-v3.0.0-rc.47-ota.bin",
+      "included_in_release": true,
+      "update_required": true
+    },
+    "f303": {
+      "version": "v3.0.0-rc.9",
+      "commit": "097229879d01770e2f155a7f151164d0baaff05c",
+      "image_bytes": 101708,
+      "image_sha256": "36cc839ad3babbc284d2870c7381e2e01c593b4e74076d5901cef7ee1268d4c4",
+      "file": "followcore-can-f303-v3.0.0-rc.9-app.bin",
+      "url": null,
+      "included_in_release": false,
+      "update_required": false,
+      "reference_only": true,
+      "distribution_note": "Installed compatible driver identity only; no driver download is published by this release."
+    }
+  },
+  "github_device_ota_available": true,
+  "github_device_check_available": true,
+  "pulse_available": false,
+  "ethercat_available": false,
+  "validation": {
+    "version": "v3.0.0-rc.47",
+    "variant": "FollowCore-CAN",
+    "date": "2026-10-23",
+    "source_commit": "8505a64d601fd577fe616abef2e09e2a3c07b7de",
+    "s3_build": "PASS; clean trace-enabled 339.060s and trace-disabled 337.539s builds. Published image is the trace-enabled build.",
+    "s3_signature_provenance": "PASS; fixed RSA-3072/PSS trust, application version/source descriptor, clean frozen full-input provenance, exact image size and SHA256 verified.",
+    "s3_image_sha256": "b1b668224fe897210c644ff41eb6499a1ee6b6e5dac506b7153d250f3ffce45c",
+    "s3_image_bytes": 2453504,
+    "host_tests": "PASS; 122 C++ ASan/UBSan groups and ancillary checks; four trace-enabled groups and ancillary checks. Includes admission, verified electrical use despite stale PID qualification, independent flags, cancellation, deadlines and stale epoch rejection.",
+    "ui_tests": "PASS; native LVGL screenshots, dynamic WASM and fixed-pool WASM checks, 634 required glyphs. Install the matching browser bundle after the firmware upgrade.",
+    "resource_checks": "PASS selected local-frame gates; not a complete worst-case stack or execution-time proof. Static RAM enabled139476B/disabled113668B. Disabled build contains no calibration_capture symbols.",
+    "driver": "Existing paired F303 rc.9 source097229879d01770e2f155a7f151164d0baaff05c unchanged; reference-only, no driver binary or download URL published. This candidate targets that installed driver, not the older public rc.3 driver.",
+    "hardware_installation": "NOT_RUN for rc.47. The normal wired upgrade was refused before reset or writing because the old firmware did not confirm maintenance standstill; no safety gate was bypassed. Device remains rc.44 pending operator OTA.",
+    "online_ota_acceptance": "PENDING operator rc.44-to-rc.47 test. PC asset download/hash verification is not physical ESP32 OTA acceptance or a guarantee of regional network access.",
+    "mechanical_acceptance": "NOT_RUN for rc.47. Earlier unloaded rc.44 parameter-selection results do not qualify this new confirmation/return workflow or a loaded machine.",
+    "f303_loops_profile_current_and_trust": "UNCHANGED; no new driver algorithm, driver resource use, profile V/A/D/J, current limit, partition layout, eFuse or signing trust.",
+    "diagnostic_capture": "Compiled in for controlled testing; explicit diagnostic access only. No raw captures, credentials, MCU source, ELF or private keys are published.",
+    "power_loss_loaded_and_long_term_reliability": "NOT_QUALIFIED"
+  },
+  "assets": [
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.47-ota.bin",
+      "bytes": 2453504,
+      "sha256": "b1b668224fe897210c644ff41eb6499a1ee6b6e5dac506b7153d250f3ffce45c",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.47/followcore-can-s3-v3.0.0-rc.47-ota.bin"
+    },
+    {
+      "file": "followcore-can-s3-v3.0.0-rc.47-web.zip",
+      "bytes": 657703,
+      "sha256": "5444437b95c8a7c2d62d18135a250733d23ad767a789620447b2becba3b39b06",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.47/followcore-can-s3-v3.0.0-rc.47-web.zip"
+    },
+    {
+      "file": "followcore-can-v3.0.0-rc.47-notices.zip",
+      "bytes": 46198,
+      "sha256": "97223fbaf44799a62d75623e5ef4e0fbfffd597abdacb6933e313a1d8ddc9c5b",
+      "url": "https://github.com/sapphiresaiv/followcore-firmware/releases/download/followcore-can-v3.0.0-rc.47/followcore-can-v3.0.0-rc.47-notices.zip"
+    }
+  ]
+}

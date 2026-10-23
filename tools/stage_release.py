@@ -32,6 +32,8 @@ def main():
     p.add_argument("--driver", type=Path, required=True, help="Private F303 project directory")
     p.add_argument("--driver-version", help="Previously published compatible driver version")
     p.add_argument("--s3-only", action="store_true", help="Reference, but do not republish, the unchanged driver")
+    p.add_argument("--reference-only-driver", action="store_true", help="Record an installed driver identity without advertising an unpublished download")
+    p.add_argument("--release-notes", type=Path, help="Reviewed candidate-specific public release notes")
     p.add_argument("--github-check", action="store_true", help="This S3 implements version checking, not online installation")
     p.add_argument("--commissioning-ui", action="store_true", help="This revision fixes first-use maintenance and simplifies the UI")
     p.add_argument("--button-feedback", action="store_true", help="This revision fixes query and shared button feedback")
@@ -54,7 +56,9 @@ def main():
         raise ValueError("This tool publishes candidate versions only")
     if not re.fullmatch(r"v\d+\.\d+\.\d+-rc\.\d+", driver_version):
         raise ValueError("Invalid compatible driver candidate")
-    if args.s3_only and not (ROOT / "firmware/followcore-can/releases" / driver_version / "release-manifest.json").is_file():
+    if args.reference_only_driver and not args.s3_only:
+        raise ValueError("A reference-only driver requires an S3-only release")
+    if args.s3_only and not args.reference_only_driver and not (ROOT / "firmware/followcore-can/releases" / driver_version / "release-manifest.json").is_file():
         raise ValueError("S3-only update requires an existing public driver release")
     if args.network_profile_ui and (not args.s3_only or any((args.commissioning_ui,
             args.button_feedback, args.update_errors, args.async_tls_fix))):
@@ -123,6 +127,9 @@ def main():
         component_prefix = prefix if included else "https://github.com/" + REPO + "/releases/download/followcore-can-" + component_version + "/"
         components[component].update(file=image_name, url=component_prefix + image_name,
                                      included_in_release=included, update_required=included)
+        if component == "f303" and args.reference_only_driver:
+            components[component].update(url=None, reference_only=True,
+                distribution_note="Installed compatible driver identity only; no driver download is published by this release.")
     archive(out / f"followcore-can-s3-{version}-web.zip", [
         (args.s3_web / name, name) for name in
         ("index.html", "app.js", "ui_wasm.js", "ui_wasm.wasm")])
@@ -566,6 +573,11 @@ Support: sapphiresaiv@gmail.com; Douyin: dys5roelfesy.
 Download the accompanying third-party notices. Upstream licenses remain valid.
 """
         (out/"RELEASE_NOTES.md").write_text(notes)
+    if args.release_notes:
+        notes = args.release_notes.read_text()
+        if not notes.startswith("# FollowCore-CAN " + version + "\n"):
+            raise ValueError("Reviewed release notes do not identify this candidate")
+        (out / "RELEASE_NOTES.md").write_text(notes)
     sums = "".join(sha(f) + "  " + f.name + "\n" for f in sorted(out.iterdir()))
     (out / "SHA256SUMS").write_text(sums)
     public = ROOT / "firmware/followcore-can/releases" / version

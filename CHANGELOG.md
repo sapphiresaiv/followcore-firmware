@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.0.0-rc.47 — Calibration qualification and explicit use
+
+- Require calibrated mechanical travel, but not laser calibration, for load/electrical calibration.
+- Keep independent trusted-used indicators and invalidate only records with a changed fingerprint.
+- Explicitly verify/use saved parameters, then return to the existing mechanical zero through the native control route.
+- Permit verified new electrical parameters without restoring a stale PID record; reject late-owner requests.
+- Include the matching browser UI and optional calibration diagnostics for controlled testing.
+- Existing paired F303 rc.9 is required, unchanged and not included; older public driver pairing is not qualified.
+- Build/host/UI/signature checks passed. rc.47 installation, mechanical use/return and online OTA remain pending operator acceptance.
+- Supersede the historical rc.104 catalog target without deleting or overwriting its immutable assets.
+
 ## v3.0.0-rc.104 — Synchronized OTA target for local rc.34
 
 - VERSION-only target of the final rc.34 controller source; retain rc.100 unchanged.
